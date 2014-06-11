@@ -26,7 +26,7 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing <em>actors</em> from <strong>abstract strategy games</strong>.
+This document proposes a format for representing _actors_ from **abstract strategy games**.
 
 <div class="sub-title">Status of this document</div>
 
@@ -121,8 +121,14 @@ Where:
  * the variant is Chinese chess;
  * the name of the actor is Rook.
 
-## Informative References
+* * *
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
 * [General Gameplay Notation](General-Gameplay-Notation)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better? [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/General-Actor-Notation.md) and submit a hug request.

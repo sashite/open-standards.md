@@ -26,7 +26,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing <em>actions</em> of most abstract strategy <strong>board games</strong>.
+This document proposes a format for representing _actions_ of most abstract strategy **board games**.
 
 <div class="sub-title">Status of this document</div>
 
@@ -236,9 +236,15 @@ List of actions of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 44. `[ "remove", 6, 21 ]`
 45. `[ "shift", 19, 12 ]`
 
-## Informative References
+* * *
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
 * [Algebraic Notation](//www.fide.com/fide/handbook?id=125&view=article)
 * [Smart Game Format](//www.red-bean.com/sgf/)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better? [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Portable-Action-Notation.md) and submit a hug request.

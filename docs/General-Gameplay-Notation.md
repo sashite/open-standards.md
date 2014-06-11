@@ -26,7 +26,7 @@ A general purpose ASCII-based format for storing patterns defined through the ab
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing <em>patterns</em> defined through the abstract strategy board <strong>game rules</strong>.
+This document proposes a format for representing _patterns_ defined through the abstract strategy board **game rules**.
 
 <div class="sub-title">Status of this document</div>
 
@@ -703,8 +703,14 @@ Its JSON representation could be:
       ]
     ]
 
-## Informative References
+* * *
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
 * [Portable Action Notation](Portable-Action-Notation)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better? [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/General-Gameplay-Notation.md) and submit a hug request.

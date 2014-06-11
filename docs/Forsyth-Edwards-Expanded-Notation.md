@@ -26,7 +26,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing most <strong>chessboard positions</strong>, as <q>pictures of game at a given moment</q>.
+This document proposes a format for representing most **chessboard positions**, as <q>pictures of game at a given moment</q>.
 
 <div class="sub-title">Status of this document</div>
 
@@ -186,7 +186,7 @@ Then the position becomes:
 
     ♜,♞,♝,♛,♚,♝,♞,♜/♟,♟,♟,♟,♟,♟,♟,♟/8/8/4,♙,3/8/♙,♙,♙,♙,1,♙,♙,♙/♖,♘,♗,♕,♔,♗,♘,♖ t - 0,7,56,63 -
 
-## Starting positions
+### Starting positions
 
 <ul class="nav nav-tabs">
   <li class="active">
@@ -240,7 +240,9 @@ Then the position becomes:
   </div>
 </div>
 
-## Informative References
+* * *
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
@@ -248,3 +250,7 @@ This work is influenced by several documents.
 * [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Shogi (<abbr title="Shogi FEN">SFEN</abbr>)](//www.glaurungchess.com/shogi/usi.html)
 * [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Western](//en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
 * [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Xiangqi](//www.wxf.org/xq/computer/fen.pdf)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better? [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Forsyth-Edwards-Expanded-Notation.md) and submit a hug request.
