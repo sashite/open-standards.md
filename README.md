@@ -6,4 +6,16 @@ For [Draughts](//en.wikipedia.org/wiki/Draughts), [<ruby lang="zh">围棋<rt lan
 
 ## Contributing
 
-Want to make things better? Fork this repo, make your changes and submit a hug request.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## Versioning
+
+We use [Semantic Versioning 2.0.0](http://semver.org).
+
+## Copyright
+
+Copyright 2014 Cyril Wack
