@@ -7,13 +7,13 @@ A general purpose JSON-based format for storing actions of most abstract strateg
   <dd><time datetime="2014-03-08T01:23:45Z">8 March 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-05-28T23:42:34Z">28 May 2014</time></dd>
+  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd>Cyril Wack (<a rel="external" href="//twitter.com/cyri_">@cyri_</a>)</dd>
+  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -26,7 +26,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing <em>actions</em> of most abstract strategy <strong>board games</strong>.
+This document proposes a format for representing _actions_ of most abstract strategy **board games**.
 
 <div class="sub-title">Status of this document</div>
 
@@ -94,7 +94,7 @@ The following table defines the properties that appear in this resource:
 
 | Property name  | Value    | Description |
 | -------------- | -------- | ----------- |
-| "`verb`"       | a string | Indicates the keyword that in syntax conveys an action.  The RECOMMENDED values are "`shift`", "`capture`", and "`remove`". |
+| "`verb`"       | a string | Indicates the keyword that in syntax conveys an action.  The possible values are "`shift`", "`capture`", and "`remove`". |
 | "`src_square`" | unsigned integer | Indicates a source square occupied by an actor. |
 | "`dst_square`" | unsigned integer | Indicates a target square. |
 
@@ -236,9 +236,19 @@ List of actions of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 44. `[ "remove", 6, 21 ]`
 45. `[ "shift", 19, 12 ]`
 
-## Informative References
+* * *
+
+<div class="sub-title">See also</div>
+
+* [An implementation in Ruby](//github.com/sashite/pan.rb)
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
-* [Algebraic Notation](//www.fide.com/fide/handbook?id=125&view=article)
+* [Algebraic Notation](//en.wikipedia.org/wiki/Algebraic_notation_(chess))
 * [Smart Game Format](//www.red-bean.com/sgf/)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Portable-Action-Notation.md) and submit a hug request.

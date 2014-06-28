@@ -7,13 +7,13 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   <dd><time datetime="2013-03-29T23:17:44Z">29 March 2013</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-05-28T02:41:40Z">28 May 2014</time></dd>
+  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd>Cyril Wack (<a rel="external" href="//twitter.com/cyri_">@cyri_</a>)</dd>
+  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -26,7 +26,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing most <strong>chessboard positions</strong>, as <q>pictures of game at a given moment</q>.
+This document proposes a format for representing most **chessboard positions**, as <q>pictures of game at a given moment</q>.
 
 <div class="sub-title">Status of this document</div>
 
@@ -72,7 +72,7 @@ The use of the file suffix "`.feen`" is RECOMMENDED for files containing FEEN da
 
 When serving FEEN over HTTP, the media type "`application/vnd.feen`" is RECOMMENDED.
 
-## <span id="resource">Notation</span>
+## <span id="resource">Notation for board positions</span>
 
 A FEEN description MUST have five fields:
 
@@ -88,9 +88,9 @@ The length of a FEEN position description varies somewhat according to the posit
 
 ### Flatten board
 
-Actors MUST be identified by a string; e.g., "<abbr title="Western Pawn, White">`W:P`</abbr>", "<abbr title="Western Knight, White">`W:N`</abbr>", "<abbr title="Xiangqi Soldier, Black">`x:s`</abbr>", "<abbr title="Makruk King, White">`M:_K`</abbr>", "<abbr title="Dai dai Shogi promoted White elephant, Gote">`dai_dai_shogi:+we`</abbr>".
+Actors MUST be identified by a single character; e.g., "<abbr title="Western Pawn, White">`P`</abbr>", "<abbr title="Western Knight, White">`N`</abbr>", "<abbr title="Xiangqi Soldier, Black">`卒`</abbr>", "<abbr title="Makruk King, White">`♔`</abbr>", "<abbr title="Dai dai Shogi Fragrant elephant, Sente">`象`</abbr>".
 
-Blank squares are noted using digits 1 through n (where n is the number of blank squares on the last dimension).  A comma character "`,`" is used to separate actors, and between each dimension, solidus characters "`/`" are used.
+Blank squares are noted using digits 1 through n (where n is the number of blank squares on the last dimension).  An empty string "" is used to separate actors, and between each dimension, solidus characters "`/`" are used.
 
 #### Empty chessboard examples
 
@@ -136,7 +136,7 @@ This field MUST contain a single letter: "`b`" means <q>bottom</q> moves next, "
 
 ### Captured actors
 
-Captured actors MUST be listed here.  The actors are listed in alphabetical order, separated by a comma character "`,`".
+Captured actors MUST be listed here.  The actors are listed in alphabetical order, separated by an empty string "".
 
 If neither player has any captured actors, for instance on an initial position, this MUST be "`-`".
 
@@ -145,7 +145,7 @@ Captured actors are said to be <q>in hand</q> at Shogi.
 
 Example from a game with two Shogi players, in a position where bottom (<ruby lang="ja">先手<rt lang="en">Sente</rt></ruby>) had captured 1 Rook, 1 Gold and 4 Pawns, while top (<ruby lang="ja">後手<rt lang="en">Gote</rt></ruby>) has captured 2 Bishops, 2 Silvers and 3 Pawns:
 
-    S:G,S:P,S:P,S:P,S:P,S:R,s:b,s:b,s:p,s:p,s:p,s:s,s:s
+    GPPPPRbbpppss
 
 ### Castling availability
 
@@ -172,21 +172,7 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
 
 ## Example
 
-### Scenario
-
-Given the following position between two Western players:
-
-    ♜,♞,♝,♛,♚,♝,♞,♜/♟,♟,♟,♟,♟,♟,♟,♟/8/8/8/8/♙,♙,♙,♙,♙,♙,♙,♙/♖,♘,♗,♕,♔,♗,♘,♖ b - 0,7,56,63 -
-
-When this action (in <abbr title="Portable Action Notation">PAN</abbr> format) is applied:
-
-    [ "shift", 52, 36 ]
-
-Then the position becomes:
-
-    ♜,♞,♝,♛,♚,♝,♞,♜/♟,♟,♟,♟,♟,♟,♟,♟/8/8/4,♙,3/8/♙,♙,♙,♙,1,♙,♙,♙/♖,♘,♗,♕,♔,♗,♘,♖ t - 0,7,56,63 -
-
-## Starting positions
+### Starting positions
 
 <ul class="nav nav-tabs">
   <li class="active">
@@ -208,43 +194,58 @@ Then the position becomes:
   <li>
     <a href="#data_fields-board_state-startpos_examples-xiangqi" data-toggle="tab">Xiangqi</a>
   </li>
-
-  <li>
-    <a href="#data_fields-board_state-startpos_examples-shogi_vs_xiangqi" data-toggle="tab">Shogi vs Western</a>
-  </li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane fade active in" id="data_fields-board_state-startpos_examples-janggi">
-    <pre><code class="feen">j:r,j:m,j:e,j:s,1,j:s,j:e,j:m,j:r/4,j:_g,4/1,j:p,5,j:p,1/j:j,1,j:j,1,j:j,1,j:j,1,j:j/9/9/J:J,1,J:J,1,J:J,1,J:J,1,J:J/1,J:P,5,J:P,1/4,J:_G,4/J:R,J:M,J:E,J:S,1,J:S,J:E,J:M,J:R b - - -</code></pre>
+    <pre><code class="feen">rmes1semr/4g4/1p5p1/j1j1j1j1j/9/9/J1J1J1J1J/1P5P1/4G4/RMES1SEMR b - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-makruk">
-    <pre><code class="feen">m:r,m:n,m:b,m:q,m:_k,m:b,m:n,m:r/8/m:p,m:p,m:p,m:p,m:p,m:p,m:p,m:p/8/8/M:P,M:P,M:P,M:P,M:P,M:P,M:P,M:P/8/M:R,M:N,M:B,M:_K,M:Q,M:B,M:N,M:R b - - -</code></pre>
+    <pre><code class="feen">rnbqkbnr/8/pppppppp/8/8/PPPPPPPP/8/RNBKQBNR b - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-shogi">
-    <pre><code class="feen">s:l,s:n,s:s,s:g,s:_k,s:g,s:s,s:n,s:l/1,s:r,5,s:b,1/s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p/9/9/9/S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P/1,S:B,5,S:R,1/S:L,S:N,S:S,S:G,S:_K,S:G,S:S,S:N,S:L b - - -</code></pre>
+    <pre><code class="feen">lnsg_kgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSG_KGSNL b - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-western">
-    <pre><code class="feen">w:r,w:n,w:b,w:q,w:_k,w:b,w:n,w:r/w:p,w:p,w:p,w:p,w:p,w:p,w:p,w:p/8/8/8/8/W:P,W:P,W:P,W:P,W:P,W:P,W:P,W:P/W:R,W:N,W:B,W:Q,W:_K,W:B,W:N,W:R b - 0,7,56,63 -</code></pre>
+    <pre><code class="feen">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b - 0,7,56,63 -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-xiangqi">
-    <pre><code class="feen">x:r,x:h,x:e,x:a,x:_g,x:a,x:e,x:h,x:r/9/1,x:c,5,x:c,1/x:s,1,x:s,1,x:s,1,x:s,1,x:s/9/9/X:S,1,X:S,1,X:S,1,X:S,1,X:S/1,X:C,5,X:C,1/9/X:R,X:H,X:E,X:A,X:_G,X:A,X:E,X:H,X:R b - - -</code></pre>
-  </div>
-
-  <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-shogi_vs_xiangqi">
-    <pre><code class="feen">w:r,w:n,w:b,w:q,w:_k,w:m,w:b,w:n,w:r/w:p,w:p,w:p,w:p,w:p,w:p,w:p,w:p,w:p/9/9/9/9/S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P/1,S:B,5,S:R,1/S:L,S:N,S:S,S:G,S:_K,S:G,S:S,S:N,S:L b - 0,7 -</code></pre>
+    <pre><code class="feen">rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR b - - -</code></pre>
   </div>
 </div>
 
-## Informative References
+### Scenario
+
+Given the following position between two Western players:
+
+    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ b - 0,7,56,63 -
+
+When this action (in [<abbr title="Portable Action Notation">PAN</abbr> format](Portable-Action-Notation)) is applied:
+
+    [ "shift", 52, 36 ]
+
+Then the position becomes:
+
+    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/4♙3/8/♙♙♙♙1♙♙♙/♖♘♗♕♔♗♘♖ t - 0,7,56,63 -
+
+* * *
+
+<!-- div class="sub-title">See also</div>
+
+* [An implementation in Ruby](//github.com/sashite/feen.rb) -->
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
-* [<abbr title="Portable Action Notation">PAN</abbr> format](Portable-Action-Notation)
-* [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Shogi (<abbr title="Shogi FEN">SFEN</abbr>)](//www.glaurungchess.com/shogi/usi.html)
-* [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Western](//en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
-* [<abbr title="Forsyth–Edwards Notation">FEN</abbr> for Xiangqi](//www.wxf.org/xq/computer/fen.pdf)
+* [FEN for Western](//en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
+* [FEN for Xiangqi](//www.wxf.org/xq/computer/fen.pdf)
+* [The Universal Shogi Interface](//www.glaurungchess.com/shogi/usi.html)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Forsyth-Edwards-Expanded-Notation.md) and submit a hug request.

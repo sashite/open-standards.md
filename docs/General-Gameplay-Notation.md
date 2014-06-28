@@ -1,19 +1,19 @@
 # General Gameplay Notation <small>Specification and Implementation Guide</small>
 
-A general purpose ASCII-based format for storing patterns defined through the abstract strategy board game rules.
+A general purpose JSON-based format for storing patterns defined through the abstract strategy board game rules.
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
   <dd><time datetime="2014-03-08T01:23:45Z">8 March 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-09T23:42:34Z">9 June 2014</time></dd>
+  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd>Cyril Wack (<a rel="external" href="//twitter.com/cyri_">@cyri_</a>)</dd>
+  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -26,7 +26,7 @@ A general purpose ASCII-based format for storing patterns defined through the ab
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing <em>patterns</em> defined through the abstract strategy board <strong>game rules</strong>.
+This document proposes a format for representing _patterns_ defined through the abstract strategy board **game rules**.
 
 <div class="sub-title">Status of this document</div>
 
@@ -40,9 +40,9 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 ## Introduction
 
-<abbr title="General Gameplay Notation">GGN</abbr> (<q>General Gameplay Notation</q>) is a lightweight, <abbr title="American Standard Code for Information Interchange">ASCII</abbr>-based format that gives a consistent and easy way to represent patterns defined through the abstract strategy board game rules.
+<abbr title="General Gameplay Notation">GGN</abbr> (<q>General Gameplay Notation</q>) is a lightweight, <abbr title="JavaScript Object Notation">JSON</abbr>-based format that gives a consistent and easy way to represent patterns defined through the abstract strategy board game rules.
 
-Able to describe multidimensional patterns, easy for humans to read and write, and easy for machines to import and export, it is compatible with most abstract strategy board games such as [Draughts](//en.wikipedia.org/wiki/Draughts), [Go](//en.wikipedia.org/wiki/Go_(game)) and the main chess variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi).  These properties make GGN an ideal data-interchange format for storing patterns of most actors from abstract strategy board games.
+Able to describe multidimensional patterns, easy for humans to read and write, and easy for machines to import and export, it is compatible with most chess games such as [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi).  These properties make GGN an ideal data-interchange format for storing patterns of most actors from abstract strategy board games.
 
 ### Notational conventions
 
@@ -70,114 +70,41 @@ A specification for a general gameplay notation MUST observe the following crite
 
 The use of the file suffix "`.ggn`" is RECOMMENDED for files containing GGN data.
 
-When serving GGN over HTTP, the media type "`application/vnd.ggn`" is RECOMMENDED.
+When serving GGN over HTTP, the media type "`application/vnd.ggn+json`" is RECOMMENDED.
 
 ## <span id="resource">Notation for gameplays</span>
 
-The structure of move instances can be unambiguously described with a pattern.
+The structure of move instances can be unambiguously described with an unordered set of patterns.
+
+### Pattern
+
+A pattern is an ordored list of abilities (at least one) which define possible actions.
+
+#### Ability
 
 <div class="sub-title">Resource representation</div>
 
-The <abbr title="Backus–Naur Form">BNF</abbr> structure below shows the format of the resource:
+The JSON structure below shows the format of the resource:
 
-    <Gameplay>                  ::= <Pattern> '.'
-                                  | <Pattern> '. ' <Gameplay>
+    {
+      "subject": {a hash},
+      "verb": {a hash},
+      "object": {a hash}
+    }
 
-    <Gameplay Into Base64>      ::= <RFC 4648's Base64-encoded version>
+<div class="sub-title">Properties</div>
 
-    <Pattern>                   ::= <Ability>
-                                  | <Ability> '; ' <Pattern>
+The following table defines the properties that appear in this resource:
 
-    <Ability>                   ::= <Subject> '^' <Verb> '=' <Object>
-
-    <Subject>                   ::= <...Ally?> '<' <Actor> '>' <State>
-    <...Ally?>                  ::= <Boolean>
-                                  | <Null>
-    <Actor>                     ::= <Self>
-                                  | <Gameplay Into Base64>
-    <State>                     ::= <...Last Moved Actor?> '&' <...Previous Moves Counter>
-    <...Last Moved Actor?>      ::= <Boolean>
-                                  | <Null>
-    <...Previous Moves Counter> ::= <Unsigned Integer>
-                                  | '_'
-
-    <Verb>                  ::= <Name> '[' <Direction> ']' <...Maximum Magnitude> '/' <Required?>
-    <Name>                  ::= 'capture'
-                              | 'remove'
-                              | 'shift'
-    <Direction>             ::= <Integer>
-                              | <Integer> ',' <Direction>
-    <...Maximum Magnitude>  ::= <Unsigned Integer Excluding Zero>
-                              | '_'
-    <Required?>             ::= <Boolean>
-
-    <Object>                  ::= <Square> '~' <Square> '%' <Promotable Into Actors>
-    <Square>                  ::= <...Attacked?> '@' <...Occupied!> '+' <Area>
-    <...Attacked?>            ::= <Boolean>
-                                | <Null>
-    <...Occupied!>            ::= <Subject>
-                                | <Boolean>
-                                | <Null>
-                                | <Relationship>
-    <Relationship>            ::= 'an_ally_actor'
-                                | 'an_enemy_actor'
-    <Area>                    ::= 'all'
-                                | 'furthest_one-third'
-                                | 'furthest_rank'
-                                | 'nearest_two-thirds'
-                                | 'palace'
-    <Promotable Into Actors>  ::= <Self>
-                                | <Gameplay Into Base64>
-                                | <Gameplay Into Base64> ',' <Promotable Into Actors>
-
-    <Integer>                         ::= <Negative Integer>
-                                        | <Unsigned Integer>
-    <Negative Integer>                ::= '-' <Unsigned Integer Excluding Zero>
-    <Unsigned Integer>                ::= <Zero>
-                                        | <Unsigned Integer Excluding Zero>
-    <Unsigned Integer Excluding Zero> ::= <Digit Excluding Zero>
-                                        | <Unsigned Integer Excluding Zero> <Digit>
-    <Digit>                           ::= <Digit Excluding Zero>
-                                        | <Zero>
-    <Digit Excluding Zero>            ::= '1'
-                                        | '2'
-                                        | '3'
-                                        | '4'
-                                        | '5'
-                                        | '6'
-                                        | '7'
-                                        | '8'
-                                        | '9'
-    <Boolean>                         ::= 'f'
-                                        | 't'
-    <Null>                            ::= '_'
-    <Self>                            ::= 'self'
-    <Zero>                            ::= '0'
-
-### Canonical gameplay hash coding
-
-The gameplay of actors can be named by a unique identifier, the <abbr title="Canonical Gameplay Hash">CGH</abbr> (<q>Canonical Gameplay Hash</q>).
-
-This unique identifier is computed from the SHA1 of the ascendant list in alphabetical order of the patterns of an actor.
+| Property name | Value  | Description |
+| ------------- | ------ | ----------- |
+| "`subject`"   | a hash | Indicates the actor who is played. |
+| "`verb`"      | a hash | Indicates the parameters that in syntax conveys an action. |
+| "`object`"    | a hash | Indicates the entity that is acted upon by the subject. |
 
 ## Example
 
 The GGN of Western and Xiangqi Rooks on a two-dimensional board is the same:
-
-    t<self>_&_^remove[-1,0]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[0,-1]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[0,1]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[1,0]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^shift[-1,0]_/t=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[-1,0]_/t=_@f+all~_@f+all%self; t<self>_&_^remove[-1,0]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^shift[0,-1]_/t=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[0,-1]_/t=_@f+all~_@f+all%self; t<self>_&_^remove[0,-1]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^shift[0,1]_/t=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[0,1]_/t=_@f+all~_@f+all%self; t<self>_&_^remove[0,1]1/t=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^shift[1,0]_/t=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[1,0]_/t=_@f+all~_@f+all%self; t<self>_&_^remove[1,0]1/t=_@f+all~_@an_enemy_actor+all%self.
-
-Its JSON representation could be:
 
     [
       [
@@ -703,8 +630,18 @@ Its JSON representation could be:
       ]
     ]
 
-## Informative References
+* * *
+
+<div class="sub-title">See also</div>
+
+* [An implementation in Ruby](//github.com/sashite/ggn.rb)
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
 * [Portable Action Notation](Portable-Action-Notation)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/General-Gameplay-Notation.md) and submit a hug request.

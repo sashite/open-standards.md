@@ -7,13 +7,13 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">5 August 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-05-28T23:42:34Z">28 May 2014</time></dd>
+  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd>Cyril Wack (<a rel="external" href="//twitter.com/cyri_">@cyri_</a>)</dd>
+  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -26,7 +26,7 @@ A general purpose JSON-based format for recording chess variants' games.
 
 <div class="sub-title">Abstract</div>
 
-This document proposes a format for representing most <strong>chess</strong> games (both the <em>moves</em> and related data).
+This document proposes a format for representing most **chess** games (both the _moves_ and related data).
 
 <div class="sub-title">Status of this document</div>
 
@@ -588,12 +588,19 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
       "version": "1.0.0"
     }
 
-## Informative References
+* * *
+
+<!-- div class="sub-title">See also</div>
+
+* [An implementation in Ruby](//github.com/sashite/pcn.rb) -->
+
+<div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
 * [Portable Action Notation](Portable-Action-Notation)
 * [Portable Game Notation](//www.saremba.de/chessgml/standards/pgn/pgn-complete.htm)
-* [The Universal Shogi Interface](//www.glaurungchess.com/shogi/usi.html)
-* [FEN for Xiangqi](//www.wxf.org/xq/computer/fen.pdf)
-* [UCI Protocol](//www.shredderchess.com/chess-info/features/uci-universal-chess-interface.html)
+
+<div class="sub-title">Contributing</div>
+
+Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Portable-Chess-Notation.md) and submit a hug request.
