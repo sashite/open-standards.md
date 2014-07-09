@@ -7,13 +7,13 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">5 August 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2014-07-09T23:42:34Z">9 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
+  <dd><a rel="external author" href="https://plus.google.com/+CyrilWack">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -40,7 +40,7 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 ## Introduction
 
-<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Action Notation">PAN</abbr> that gives a consistent and easy way to represent most chess games between multiplayer.
+<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Action Notation">PAN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
 
 Able to describe both multidimensional starting positions and related moves, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
 
@@ -55,7 +55,7 @@ A specification for a portable chess notation MUST observe the following criteri
 1. The details of the system MUST be publicly available and free of unnecessary complexity.
 2. The details of the system MUST be non-proprietary so that users and software developers are unrestricted by concerns about infringing on intellectual property rights.
 3. The system MUST work for a variety of programs.  The format SHOULD be such that it can be used by chess database programs, chess publishing programs, chess server programs, and chessplaying programs without being unnecessarily specific to any particular application class.
-4. The system MUST handle games which are playable by many sides.
+4. The system MUST handle games which are playable by two sides.
 5. The system MUST be easily expandable and scalable.  Examples: new chessboards, new opening positions, new actors, new moves, new rules, etc.
   * The system MUST be cross-variants.
     It SHOULD be able to represent games where sides MAY play
@@ -81,7 +81,12 @@ When serving PCN over HTTP, the media type "`application/vnd.pcn+json`" is RECOM
 The JSON structure below shows the format of the resource:
 
     {
-      "sides": {a hash},
+      "side_bottom_name": {a string},
+      "side_bottom_rating°": {an unsigned integer},
+      "side_bottom_draw_offer?": {a boolean},
+      "side_top_name": {a string},
+      "side_top_rating°": {an unsigned integer},
+      "side_top_draw_offer?": {a boolean},
       "state": {a string},
       "started_at": {a datetime},
       "startpos": {an array},
@@ -95,53 +100,49 @@ The following table defines the properties that appear in this resource:
 
 | Property name   | Value                | Description |
 | --------------- | -------------------- | ----------- |
-| "`sides`"       | a hash               | List of players by side. |
+| "`side_bottom_name`"        | a string            | The name of bottom. |
+| "`side_bottom_rating°`"     | an unsigned integer | The rating of bottom. |
+| "`side_bottom_draw_offer?`" | a boolean           | The draw offer request of bottom. |
+| "`side_top_name`"           | a string            | The name of top. |
+| "`side_top_rating°`"        | an unsigned integer | The rating of top. |
+| "`side_top_draw_offer?`"    | a boolean           | The draw offer request of top. |
 | "`state`"       | a string             | Indicates the state of the game. |
 | "`started_at`"  | a datetime           | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
 | "`startpos`"    | an array             | List of squares that identify actors on the board's starting position. |
 | "`moves`"       | an array             | List of moves associated with the game. |
 | "`version`"     | a string             | Version number of the current PCN document.  The value is specified in [Semantic Versioning 2.0.0](//semver.org/spec/v2.0.0.html) format. |
 
-### Sides
+### Bottom-side's name
 
-The reserved "`sides`" property is REQUIRED.
+The reserved "`side_bottom_name`" property is RECOMMENDED.
 
-It is possible to play between multiplayer, given at the rate of one key by player.  The turn of players SHOULD be given by sorted the given alphanumeric keys.
+As in [GAN](General-Actor-Notation)'s <q>Naming the sides</q>, _the player who moves first_ is referred to as **bottom**.
 
-<div class="sub-title">Resource representation</div>
+### Bottom-side's rating
 
-The JSON structure below shows the format of a resource:
+The reserved "`side_bottom_rating°`" property is RECOMMENDED.
 
-    {
-      {side}: {
-        "name": {string},
-        "rating°": {unsigned integer},
-        "draw_offer?": {boolean}
-      }
-    }
+The rating system MAY be Elo.
 
-<div class="sub-title">Properties</div>
+### Bottom-side's draw offer request
 
-The following table defines the properties that appear in this resource:
+The reserved "`side_bottom_draw_offer?`" property is RECOMMENDED.
 
-| Property name   | Value               | Description                      |
-| --------------- | ------------------- | -------------------------------- |
-| "`side`"        | a string            | The player's side.               |
-| "`name`"        | a string            | The player's name.               |
-| "`rating°`"     | an unsigned integer | The player's rating.             |
-| "`draw_offer?`" | a boolean           | The player's draw offer request. |
+### Top-side's name
 
-<div class="sub-title">Example</div>
+The reserved "`side_top_name`" property is RECOMMENDED.
 
-Here is a sample side:
+As in [GAN](General-Actor-Notation)'s <q>Naming the sides</q>, _the player who moves second_ is referred to as **top**.
 
-    {
-      "bottom": {
-        "name": "Bob",
-        "rating°": 1500,
-        "draw_offer?": false
-      }
-    }
+### Top-side's rating
+
+The reserved "`side_top_rating°`" property is RECOMMENDED.
+
+The rating system MAY be Elo.
+
+### Top-side's draw offer request
+
+The reserved "`side_top_draw_offer?`" property is RECOMMENDED.
 
 ### State
 
@@ -521,10 +522,9 @@ The "`version`" property specifies the version of PCN being used.
 Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
-      "sides": {
-        "bottom": { "name": "Anderssen, Adolph"   },
-        "top":    { "name": "Lionel, Kieseritsky" }
-      },
+      "side_top_name":    "Lionel, Kieseritsky",
+      "side_bottom_name": "Anderssen, Adolph",
+
       "state": "checkmate",
       "started_at": "1851-06-21T16:00:00Z",
       "startpos": [

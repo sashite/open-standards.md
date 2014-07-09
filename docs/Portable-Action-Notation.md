@@ -13,7 +13,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd><a rel="external" href="//cyril.io">Cyril Wack</a></dd>
+  <dd><a rel="external author" href="https://plus.google.com/+CyrilWack">Cyril Wack</a></dd>
 </dl>
 
 <div class="alert alert-warning">
