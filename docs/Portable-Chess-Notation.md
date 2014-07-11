@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">5 August 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-09T23:42:34Z">9 July 2014</time></dd>
+  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -430,15 +430,9 @@ Then the position becomes:
       [null, null, null, null, null, null]
     ]
 
-#### Remove <small>an actor with a Western actor</small>
+#### Capture <small>an actor</small>
 
-Let's detach an opponent's actor from the board by taking it with one's own actor:
-
-    [[ "remove", 42, 42 ]]
-
-#### Capture <small>an actor with a Shogi actor</small>
-
-Let's capture an enemy actor with a friendly <q>Shogi Rook</q>.
+Let's detach an opponent's actor from the board by taking it with a friendly actor:
 
 Given the following position:
 
@@ -541,12 +535,12 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ "shift", 52, 36 ]],
         [[ "shift", 12, 28 ]],
         [[ "shift", 53, 37 ]],
-        [[ "remove", 28, 37 ]],
+        [[ "capture", 28, 37 ]],
         [[ "shift", 61, 34 ]],
         [[ "shift", 3, 39 ]],
         [[ "shift", 60, 61 ]],
         [[ "shift", 9, 25 ]],
-        [[ "remove", 34, 25 ]],
+        [[ "capture", 34, 25 ]],
         [[ "shift", 6, 21 ]],
         [[ "shift", 62, 45 ]],
         [[ "shift", 39, 23 ]],
@@ -559,29 +553,29 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ "shift", 54, 38 ]],
         [[ "shift", 31, 21 ]],
         [[ "shift", 63, 62 ]],
-        [[ "remove", 18, 25 ]],
+        [[ "capture", 18, 25 ]],
         [[ "shift", 55, 39 ]],
         [[ "shift", 30, 22 ]],
         [[ "shift", 39, 31 ]],
         [[ "shift", 22, 30 ]],
         [[ "shift", 59, 45 ]],
         [[ "shift", 21, 6 ]],
-        [[ "remove", 58, 37 ]],
+        [[ "capture", 58, 37 ]],
         [[ "shift", 30, 21 ]],
         [[ "shift", 57, 42 ]],
         [[ "shift", 5, 26 ]],
         [[ "shift", 42, 27 ]],
-        [[ "remove", 21, 49 ]],
+        [[ "capture", 21, 49 ]],
         [[ "shift", 37, 19 ]],
-        [[ "remove", 26, 62 ]],
+        [[ "capture", 26, 62 ]],
         [[ "shift", 36, 28 ]],
-        [[ "remove", 49, 56 ]],
+        [[ "capture", 49, 56 ]],
         [[ "shift", 61, 52 ]],
         [[ "shift", 1, 16 ]],
-        [[ "remove", 29, 14 ]],
+        [[ "capture", 29, 14 ]],
         [[ "shift", 4, 3 ]],
         [[ "shift", 45, 21 ]],
-        [[ "remove", 6, 21 ]],
+        [[ "capture", 6, 21 ]],
         [[ "shift", 19, 12 ]]
       ],
       "rule": "20140101",

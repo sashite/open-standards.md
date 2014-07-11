@@ -7,7 +7,7 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
   <dd><time datetime="2014-06-28T01:23:45Z">28 June 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -96,18 +96,18 @@ The <abbr title="Backus–Naur Form">BNF</abbr> structure below shows the format
 
 Here is the CAN of the rook on the square `[0, 0]` (from the starting position):
 
-    t<self>_&_^remove[-1,0]1=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[0,-1]1=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[0,1]1=_@f+all~_@an_enemy_actor+all%self. \
-    t<self>_&_^remove[1,0]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^capture[-1,0]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^capture[0,-1]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^capture[0,1]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^capture[1,0]1=_@f+all~_@an_enemy_actor+all%self. \
     t<self>_&_^shift[-1,0]_=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[-1,0]_=_@f+all~_@f+all%self; t<self>_&_^remove[-1,0]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^shift[-1,0]_=_@f+all~_@f+all%self; t<self>_&_^capture[-1,0]1=_@f+all~_@an_enemy_actor+all%self. \
     t<self>_&_^shift[0,-1]_=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[0,-1]_=_@f+all~_@f+all%self; t<self>_&_^remove[0,-1]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^shift[0,-1]_=_@f+all~_@f+all%self; t<self>_&_^capture[0,-1]1=_@f+all~_@an_enemy_actor+all%self. \
     t<self>_&_^shift[0,1]_=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[0,1]_=_@f+all~_@f+all%self; t<self>_&_^remove[0,1]1=_@f+all~_@an_enemy_actor+all%self. \
+    t<self>_&_^shift[0,1]_=_@f+all~_@f+all%self; t<self>_&_^capture[0,1]1=_@f+all~_@an_enemy_actor+all%self. \
     t<self>_&_^shift[1,0]_=_@f+all~_@f+all%self. \
-    t<self>_&_^shift[1,0]_=_@f+all~_@f+all%self; t<self>_&_^remove[1,0]1=_@f+all~_@an_enemy_actor+all%self.:\
+    t<self>_&_^shift[1,0]_=_@f+all~_@f+all%self; t<self>_&_^capture[1,0]1=_@f+all~_@an_enemy_actor+all%self.:\
     t
 
 Advising that:

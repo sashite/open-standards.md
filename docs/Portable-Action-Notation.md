@@ -7,7 +7,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
   <dd><time datetime="2014-03-08T01:23:45Z">8 March 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -94,7 +94,7 @@ The following table defines the properties that appear in this resource:
 
 | Property name  | Value    | Description |
 | -------------- | -------- | ----------- |
-| "`verb`"       | a string | Indicates the keyword that in syntax conveys an action.  The possible values are "`shift`", "`capture`", and "`remove`". |
+| "`verb`"       | a string | Indicates the keyword that in syntax conveys an action.  The possible values are "`shift`", and "`capture`". |
 | "`src_square`" | unsigned integer | Indicates a source square occupied by an actor. |
 | "`dst_square`" | unsigned integer | Indicates a target square. |
 
@@ -111,22 +111,9 @@ Act of transfering an actor from a source square to a destination square of the 
   </ul>
 </div>
 
-#### Remove
-
-Act of cleaning a destination square of the board, and then transfering an actor from a source square to this destination square.
-
-<div class="alert alert-warning">
-  <strong>Integrity constraints with the board:</strong>
-
-  <ul>
-    <li>The given source square MUST be occupied by an actor.</li>
-    <li>The given destination square MUST be occupied by an actor.</li>
-  </ul>
-</div>
-
 #### Capture
 
-Act of moving the actor from a destination square of the board to the actors in hand, and then transfering an actor from a source square to this destination square.
+Act of cleaning a destination square of the board, and then transfering an actor from a source square to the cleaned square.
 
 <span class="label label-info">Captured actors:</span>
 Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retained <q>in hand</q>.
@@ -193,12 +180,12 @@ List of actions of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 1. `[ "shift", 52, 36 ]`
 2. `[ "shift", 12, 28 ]`
 3. `[ "shift", 53, 37 ]`
-4. `[ "remove", 28, 37 ]`
+4. `[ "capture", 28, 37 ]`
 5. `[ "shift", 61, 34 ]`
 6. `[ "shift", 3, 39 ]`
 7. `[ "shift", 60, 61 ]`
 8. `[ "shift", 9, 25 ]`
-9. `[ "remove", 34, 25 ]`
+9. `[ "capture", 34, 25 ]`
 10. `[ "shift", 6, 21 ]`
 11. `[ "shift", 62, 45 ]`
 12. `[ "shift", 39, 23 ]`
@@ -211,29 +198,29 @@ List of actions of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 19. `[ "shift", 54, 38 ]`
 20. `[ "shift", 31, 21 ]`
 21. `[ "shift", 63, 62 ]`
-22. `[ "remove", 18, 25 ]`
+22. `[ "capture", 18, 25 ]`
 23. `[ "shift", 55, 39 ]`
 24. `[ "shift", 30, 22 ]`
 25. `[ "shift", 39, 31 ]`
 26. `[ "shift", 22, 30 ]`
 27. `[ "shift", 59, 45 ]`
 28. `[ "shift", 21, 6 ]`
-29. `[ "remove", 58, 37 ]`
+29. `[ "capture", 58, 37 ]`
 30. `[ "shift", 30, 21 ]`
 31. `[ "shift", 57, 42 ]`
 32. `[ "shift", 5, 26 ]`
 33. `[ "shift", 42, 27 ]`
-34. `[ "remove", 21, 49 ]`
+34. `[ "capture", 21, 49 ]`
 35. `[ "shift", 37, 19 ]`
-36. `[ "remove", 26, 62 ]`
+36. `[ "capture", 26, 62 ]`
 37. `[ "shift", 36, 28 ]`
-38. `[ "remove", 49, 56 ]`
+38. `[ "capture", 49, 56 ]`
 39. `[ "shift", 61, 52 ]`
 40. `[ "shift", 1, 16 ]`
-41. `[ "remove", 29, 14 ]`
+41. `[ "capture", 29, 14 ]`
 42. `[ "shift", 4, 3 ]`
 43. `[ "shift", 45, 21 ]`
-44. `[ "remove", 6, 21 ]`
+44. `[ "capture", 6, 21 ]`
 45. `[ "shift", 19, 12 ]`
 
 * * *
