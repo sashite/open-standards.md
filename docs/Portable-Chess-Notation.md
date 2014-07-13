@@ -392,9 +392,7 @@ The reserved "`moves`" property is REQUIRED.
 
 The moves themselves are given as an ordered set of _actions_ in [portable action notation](Portable-Action-Notation).  A move MUST contain at least one action.
 
-#### Example
-
-The following move is composed of 2 actions:
+For example, the following move is composed of 2 actions:
 
     [[ "capture", 42, 43 ], [ "promote", 43, "S:+R" ]]
 
@@ -511,9 +509,7 @@ The reserved "`version`" property is REQUIRED.
 
 The "`version`" property specifies the version of PCN being used.
 
-## Example
-
-Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
+For example, here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
       "side_top_name":    "Lionel, Kieseritsky",
