@@ -82,7 +82,7 @@ A FEEN description MUST have five fields:
 4. Castling availability
 5. En passant
 
-Each field MUST be composed only of ASCII characters, and non-blank printing.  Adjacent fields MUST be separated by a single ASCII space character (i.e., "` `").  When a field is blank, it MUST be "`-`".
+Each field MUST be composed only of ASCII characters, and non-blank printing.  Adjacent fields MUST be separated by a single ASCII space character (i.e., " ").  When a field is blank, it MUST be "`-`".
 
 The length of a FEEN position description varies somewhat according to the position and the number of actors.
 
