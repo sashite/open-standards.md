@@ -1,0 +1,126 @@
+{
+  "Chess-Position-Notation.md": {
+    "title": "Chess Position Notation",
+    "description": "Specifications and implementation guide to represent a canonical board position, preventing from duplicates, as defined through the rules of chess.",
+    "tags": [
+      "canonical board position",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "position",
+      "rules of chess",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "Chess-Actor-Notation.md": {
+    "title": "Chess Actor Notation",
+    "description": "Specifications and implementation guide to represent a canonical actor, preventing from duplicates, as defined through the rules of chess.",
+    "tags": [
+      "board",
+      "canonical actor",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "position",
+      "rules of chess",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "Chess-Gameplay-Notation.md": {
+    "title": "Chess Gameplay Notation",
+    "description": "Specifications and implementation guide to represent a canonical gameplay, preventing from duplicates, as defined through the rules of chess.",
+    "tags": [
+      "board",
+      "canonical gameplay",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "position",
+      "rules of chess",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "Forsyth-Edwards-Expanded-Notation.md": {
+    "title": "Forsyth–Edwards Expanded Notation",
+    "description": "Specifications and implementation guide to represent a particular board position in any number of dimensions, as a picture of the game at a given moment.",
+    "tags": [
+      "board position",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "picture of the game",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "General-Actor-Notation.md": {
+    "title": "General Actor Notation",
+    "description": "Specifications and implementation guide to represent an actor from abstract strategy games.",
+    "tags": [
+      "abstract strategy games",
+      "actor",
+      "board",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "General-Gameplay-Notation.md": {
+    "title": "General Gameplay Notation",
+    "description": "Specifications and implementation guide to represent patterns of moves, as specified in most abstract strategy rules.",
+    "tags": [
+      "abstract strategy rules",
+      "board",
+      "chess",
+      "chessboard",
+      "game",
+      "go",
+      "patterns",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "Portable-Chess-Notation.md": {
+    "title": "Portable Chess Notation",
+    "description": "Specifications and implementation guide to represent a chess game (both the moves and related data).",
+    "tags": [
+      "board",
+      "chess game",
+      "chessboard",
+      "go",
+      "moves",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
+  },
+  "Portable-Action-Notation.md": {
+    "title": "Portable Action Notation",
+    "description": "Specifications and implementation guide to represent an action, from most abstract strategy board games.",
+    "tags": [
+      "action",
+      "board games",
+      "chess",
+      "chessboard",
+      "go",
+      "move",
+      "piece",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
+  }
+}
