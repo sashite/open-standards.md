@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">5 August 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
+  <dd><time datetime="2014-07-16T23:42:34Z">16 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -47,6 +47,10 @@ Able to describe both multidimensional starting positions and related moves, eas
 ### Notational conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](//tools.ietf.org/html/rfc2119).
+
+#### Naming the actors
+
+The key word "actor" and its notation are to be interpreted as described in [General Actor Notation](General-Actor-Notation).
 
 ## Specification goals
 
@@ -174,217 +178,150 @@ Chess positions on the chessboard can be represented by an array.
 
 Even though it is unusual, it is possible to represent a chessboard from one dimension.  Each dimension can be described by an embedded array (where the first dimension SHOULD be the root array).
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <span class="panel-title">Empty chessboard examples</span>
-  </div>
+##### Empty position examples
 
-  <div class="panel-body">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#board-empty_chessboard_examples-6_size" data-toggle="tab">6 size</a>
-      </li>
+###### 6 size chessboard
 
-      <li>
-        <a href="#board-empty_chessboard_examples-4x8_size" data-toggle="tab">4x8 size</a>
-      </li>
+    [ null, null, null, null, null, null ]
 
-      <li>
-        <a href="#board-empty_chessboard_examples-7x7_size" data-toggle="tab">7x7 size</a>
-      </li>
+###### 4x8 size chessboard
 
-      <li>
-        <a href="#board-empty_chessboard_examples-5x5x5_size" data-toggle="tab">5x5x5 size</a>
-      </li>
-    </ul>
+    [
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ]
+    ]
 
-    <div class="tab-content">
-      <div class="tab-pane fade active in" id="board-empty_chessboard_examples-6_size">
-        <pre><code class="json">[null, null, null, null, null, null]</code></pre>
-      </div>
+Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>](//en.wikipedia.org/wiki/Banqi).
 
-      <div class="tab-pane fade" id="board-empty_chessboard_examples-4x8_size">
-        <pre><code class="json">[
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null]
-]</code></pre>
+###### 7x7 size chessboard
 
-        <blockquote>
-          <p>
-            Used in the game:
-            <cite title="Wikipedia"><a rel="external" href="//en.wikipedia.org/wiki/Banqi">Banqi (<span lang="zh">盲棋</span>)</a></cite>.
-          </p>
-        </blockquote>
-      </div>
+    [
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null ]
+    ]
 
-      <div class="tab-pane fade" id="board-empty_chessboard_examples-7x7_size">
-        <pre><code class="json">[
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null]
-]</code></pre>
+Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt></ruby>](//en.wikipedia.org/wiki/Tori_shogi).
 
-        <blockquote>
-          <p>
-            Used in the game:
-            <cite title="Wikipedia"><a rel="external" href="//en.wikipedia.org/wiki/Tori_shogi">Tori Shogi (<span lang="ja">禽将棋</span>)</a></cite>.
-          </p>
-        </blockquote>
-      </div>
+###### 5x5x5 size chessboard
 
-      <div class="tab-pane fade" id="board-empty_chessboard_examples-5x5x5_size">
-        <pre><code class="json">[
-  [
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null]
-  ],
-  [
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null]
-  ],
-  [
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null]
-  ],
-  [
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null]
-  ],
-  [
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null],
-    [null, null, null, null, null]
-  ]
-]</code></pre>
+    [
+      [
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ]
+      ],
+      [
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ]
+      ],
+      [
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ]
+      ],
+      [
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ]
+      ],
+      [
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ],
+        [ null, null, null, null, null ]
+      ]
+    ]
 
-        <blockquote>
-          <p>
-            Used in the game:
-            <cite title="Wikipedia"><a rel="external" href="//en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach">Raumschach</a></cite>.
-          </p>
-        </blockquote>
-      </div>
-    </div>
-  </div>
-</div>
+Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach).
 
-#### Examples
+##### Starting position examples
 
-<div class="panel-body">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <a href="#board-startpos_examples-janggi" data-toggle="tab">Janggi</a>
-    </li>
+###### Janggi chessboard
 
-    <li>
-      <a href="#board-startpos_examples-makruk" data-toggle="tab">Makruk</a>
-    </li>
+    [
+      [ "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r" ],
+      [ null, null, null, null, "j:_g", null, null, null, null ],
+      [ null, "j:p", null, null, null, null, null, "j:p", null ],
+      [ "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j" ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J" ],
+      [ null, "J:P", null, null, null, null, null, "J:P", null ],
+      [ null, null, null, null, "J:_G", null, null, null, null ],
+      [ "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R" ]
+    ]
 
-    <li>
-      <a href="#board-startpos_examples-shogi" data-toggle="tab">Shogi</a>
-    </li>
+###### Makruk chessboard
 
-    <li>
-      <a href="#board-startpos_examples-western" data-toggle="tab">Western</a>
-    </li>
+    [
+      [ "m:r", "m:n", "m:b", "m:q", "m:_k", "m:b", "m:n", "m:r" ],
+      [ null, null, null, null, null, null, null, null ],
+      [ "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p" ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P" ],
+      [ null, null, null, null, null, null, null, null ],
+      [ "M:R", "M:N", "M:B", "M:_K", "M:Q", "M:B", "M:N", "M:R" ]
+    ]
 
-    <li>
-      <a href="#board-startpos_examples-xiangqi" data-toggle="tab">Xiangqi</a>
-    </li>
-  </ul>
+###### Shogi chessboard
 
-  <div class="tab-content">
-    <div class="tab-pane fade active in" id="board-startpos_examples-janggi">
-      <pre><code class="json">[
-  ["j:r", "j:m", "j:e", "j:s",  null, "j:s", "j:e", "j:m", "j:r"],
-  [ null,  null,  null,  null, "j:_g",  null,  null,  null,  null],
-  [ null, "j:p",  null,  null,  null,  null,  null, "j:p",  null],
-  ["j:j",  null, "j:j",  null, "j:j",  null, "j:j",  null, "j:j"],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  ["J:J",  null, "J:J",  null, "J:J",  null, "J:J",  null, "J:J"],
-  [ null, "J:P",  null,  null,  null,  null,  null, "J:P",  null],
-  [ null,  null,  null,  null, "J:_G",  null,  null,  null,  null],
-  ["J:R", "J:M", "J:E", "J:S",  null, "J:S", "J:E", "J:M", "J:R"]
-]</code></pre>
-              </div>
+    [
+      [ "s:l", "s:n", "s:s", "s:g", "s:_k", "s:g", "s:s", "s:n", "s:l" ],
+      [ null, "s:r", null, null, null, null, null, "s:b", null ],
+      [ "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p" ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P" ],
+      [ null, "S:B", null, null, null, null, null, "S:R", null ],
+      [ "S:L", "S:N", "S:S", "S:G", "S:_K", "S:G", "S:S", "S:N", "S:L" ]
+    ]
 
-              <div class="tab-pane fade" id="board-startpos_examples-makruk">
-                <pre><code class="json">[
-  ["m:r", "m:n", "m:b", "m:q", "m:_k", "m:b", "m:n", "m:r"],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  ["m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p"],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  ["M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P"],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  ["M:R", "M:N", "M:B", "M:_K", "M:Q", "M:B", "M:N", "M:R"]
-]</code></pre>
-              </div>
+###### Western chessboard
 
-              <div class="tab-pane fade" id="board-startpos_examples-shogi">
-                <pre><code class="json">[
-  ["s:l", "s:n", "s:s", "s:g", "s:_k", "s:g", "s:s", "s:n", "s:l"],
-  [ null, "s:r",  null,  null,  null,  null,  null, "s:b",  null],
-  ["s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p"],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  ["S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P"],
-  [ null, "S:B",  null,  null,  null,  null,  null, "S:R",  null],
-  ["S:L", "S:N", "S:S", "S:G", "S:_K", "S:G", "S:S", "S:N", "S:L"]
-]</code></pre>
-              </div>
+    [
+      [ "w:r", "w:n", "w:b", "w:q", "w:_k", "w:b", "w:n", "w:r" ],
+      [ "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p" ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null ],
+      [ "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P" ],
+      [ "W:R", "W:N", "W:B", "W:Q", "W:_K", "W:B", "W:N", "W:R" ]
+    ]
 
-              <div class="tab-pane fade" id="board-startpos_examples-western">
-                <pre><code class="json">[
-  ["w:r", "w:n", "w:b", "w:q", "w:_k", "w:b", "w:n", "w:r"],
-  ["w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p"],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null],
-  ["W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P"],
-  ["W:R", "W:N", "W:B", "W:Q", "W:_K", "W:B", "W:N", "W:R"]
-]</code></pre>
-              </div>
+###### Xiangqi chessboard
 
-              <div class="tab-pane fade" id="board-startpos_examples-xiangqi">
-                <pre><code class="json">[
-  ["x:r", "x:h", "x:e", "x:a", "x:_g", "x:a", "x:e", "x:h", "x:r"],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  [ null, "x:c",  null,  null,  null,  null,  null, "x:c",  null],
-  ["x:s",  null, "x:s",  null, "x:s",  null, "x:s",  null, "x:s"],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  ["X:S",  null, "X:S",  null, "X:S",  null, "X:S",  null, "X:S"],
-  [ null, "X:C",  null,  null,  null,  null,  null, "X:C",  null],
-  [ null,  null,  null,  null,  null,  null,  null,  null,  null],
-  ["X:R", "X:H", "X:E", "X:A", "X:_G", "X:A", "X:E", "X:H", "X:R"]
-]</code></pre>
-              </div>
-            </div>
-</div>
+    [
+      [ "x:r", "x:h", "x:e", "x:a", "x:_g", "x:a", "x:e", "x:h", "x:r" ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ null, "x:c", null, null, null, null, null, "x:c", null ],
+      [ "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s" ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S" ],
+      [ null, "X:C", null, null, null, null, null, "X:C", null ],
+      [ null, null, null, null, null, null, null, null, null ],
+      [ "X:R", "X:H", "X:E", "X:A", "X:_G", "X:A", "X:E", "X:H", "X:R" ]
+    ]
 
 ### Moves <small>on the chessboard</small>
 
@@ -394,7 +331,7 @@ The moves themselves are given as an ordered set of _actions_ in [portable actio
 
 For example, the following move is composed of 2 actions:
 
-    [[ "capture", 42, 43 ], [ "promote", 43, "S:+R" ]]
+    [ [ "capture", 42, 43 ], [ "promote", 43, "S:+R" ] ]
 
 It can be translated into:
 
@@ -409,23 +346,23 @@ Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retai
 Given the following position:
 
     [
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 When this move, consisting of one action, is played:
 
-    [[ "drop", "S:R", 2 ]]
+    [ [ "drop", 2, "S:R" ] ]
 
 Then the position becomes:
 
     [
-      [null, null, "S:R", null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ null, null, "S:R", null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 #### Capture <small>an actor</small>
@@ -435,25 +372,25 @@ Let's detach an opponent's actor from the board by taking it with a friendly act
 Given the following position:
 
     [
-      ["s:r", "S:P", null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ "s:r", "S:P", null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 When this move, consisting of one action, is played:
 
-    [[ "capture", 0, 1 ]]
+    [ [ "capture", 0, 1 ] ]
 
 Then the position becomes:
 
     [
-      [null, "s:r", null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ null, "s:r", null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 <span class="label label-info">Captured actors:</span>
@@ -466,36 +403,36 @@ Let's transfer a friendly actor (<q>Xiangqi Chariot, Black</q>) from its square 
 Given the following position:
 
     [
-      ["x:r", null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ "x:r", null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 When this move is played:
 
-    [[ "shift", 0, 6 ]]
+    [ [ "shift", 0, 6 ] ]
 
 Then the position becomes:
 
     [
-      [null, null, null, null, null, null],
-      ["x:r", null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null],
-      [null, null, null, null, null, null]
+      [ null, null, null, null, null, null ],
+      [ "x:r", null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ],
+      [ null, null, null, null, null, null ]
     ]
 
 #### Promote <small>an actor</small>
 
 Move to promote a Western <q>Pawn</q> to a <q>Queen</q>:
 
-    [[ "shift", 15, 20 ], [ "promote", 20, "w:q" ]]
+    [ [ "shift", 15, 20 ], [ "promote", 20, "w:q" ] ]
 
 Move to promote a Shogi <q>Pawn</q>:
 
-    [[ "shift", 1, 2 ], [ "promote", 2, "s:+p" ]]
+    [ [ "shift", 1, 2 ], [ "promote", 2, "s:+p" ] ]
 
 ### Rules of chess <small>governing the play of the game</small>
 

@@ -7,7 +7,7 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
   <dd><time datetime="2012-05-04T01:23:45Z">4 May 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2014-07-16T23:42:34Z">16 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -48,10 +48,6 @@ Easy for humans to read and write, and easy for machines to import and export, i
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](//tools.ietf.org/html/rfc2119).
 
-#### Naming the actors
-
-The <q>actor</q> term is used for _pawns_, _pieces_ (e.g., queen, rook, bishop, elephant, knight, lance, cannon), _kings_, _stones_, etc.
-
 ## Specification goals
 
 A specification for a general actor notation MUST observe the following criteria:
@@ -77,6 +73,8 @@ The use of the file suffix "`.gan`" is RECOMMENDED for files containing GAN data
 When serving GAN over HTTP, the media type "`application/vnd.gan`" is RECOMMENDED.
 
 ## <span id="resource">Notation for actors</span>
+
+The <q>actor</q> term is used for _pawns_, _pieces_ (e.g., queen, rook, bishop, elephant, knight, lance, cannon), _kings_, _stones_, etc.
 
 Keys are composed of two substrings: one for the name of the game and another for the abbreviation of the actor, joined by the "`:`" character; e.g., "`go:stone`" for a Go stone.
 
