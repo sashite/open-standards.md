@@ -446,7 +446,9 @@ The reserved "`version`" property is REQUIRED.
 
 The "`version`" property specifies the version of PCN being used.
 
-For example, here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
+## Example
+
+Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
       "side_top_name":    "Lionel, Kieseritsky",
