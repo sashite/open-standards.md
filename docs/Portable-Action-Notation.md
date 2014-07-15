@@ -7,7 +7,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
   <dd><time datetime="2014-03-08T01:23:45Z">8 March 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
+  <dd><time datetime="2014-07-15T23:42:34Z">15 July 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -127,7 +127,25 @@ Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retai
   </ul>
 </div>
 
-### Promotion
+### Set
+
+<div class="sub-title">Resource representation</div>
+
+The JSON structure below shows the format of the resource:
+
+    [ {verb}, {square}, {actor} ]
+
+<div class="sub-title">Properties</div>
+
+The following table defines the properties that appear in this resource:
+
+| Property name | Value    | Description |
+| ------------- | -------- | ----------- |
+| "`verb`"      | a string | Indicates the keyword that in syntax conveys an action.  The possible values are "`drop`", and "`promote`". |
+| "`square`"    | unsigned integer | Indicates a square. |
+| "`actor`"     | unsigned integer | Indicates an actor. |
+
+#### Promotion
 
 Act of promoting an actor.
 
@@ -135,43 +153,21 @@ Act of promoting an actor.
   <strong>Integrity constraints with the board:</strong>
 
   <p>
-    The given source square MUST be occupied by an actor.
+    The given square MUST be occupied by an actor.
   </p>
 </div>
 
-<div class="sub-title">Resource representation</div>
-
-The JSON structure below shows the format of the resource:
-
-    [ "promote", {src_square}, {actor} ]
-
-<div class="sub-title">Properties</div>
-
-The following table defines the properties that appear in this resource:
-
-| Property name  | Value            | Description                                            |
-| -------------- | ---------------- | ------------------------------------------------------ |
-| "`src_square`" | unsigned integer | Indicates a source square occupied by an actor.        |
-| "`actor`"      | a string         | Indicates the new actor to replace on the same square. |
-
-### Drops
+#### Drops
 
 Act of selecting an actor in hand and place it on a square.
 
-<div class="sub-title">Resource representation</div>
+<div class="alert alert-warning">
+  <strong>Integrity constraints with the board:</strong>
 
-The JSON structure below shows the format of the resource:
-
-    [ "drop", {actor}, {dst_square} ]
-
-<div class="sub-title">Properties</div>
-
-The following table defines the properties that appear in this resource:
-
-| Property name  | Value            | Description                     |
-| -------------- | ---------------- | ------------------------------- |
-| "`actor`"      | a string         | Indicates an actor in hand.     |
-| "`dst_square`" | unsigned integer | Indicates a free target square. |
+  <p>
+    The given square MUST be free.
+  </p>
+</div>
 
 ## Example
 
