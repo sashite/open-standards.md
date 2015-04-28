@@ -4,10 +4,10 @@ A general purpose <abbr title="American Standard Code for Information Interchang
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2013-03-29T23:17:44Z">29 March 2013</time></dd>
+  <dd><time datetime="2013-03-29T23:17:44Z">March 29, 2013</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2015-04-29T23:42:34Z">April 29, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -132,7 +132,7 @@ Blank squares are noted using digits 1 through n (where n is the number of blank
 
 ### Active side
 
-This field MUST contain a single letter: "`b`" means <q>bottom</q> moves next, "`t`" means <q>top</q>.
+This field MUST contain a single letter: "`B`" means <q>bottom</q> moves next, "`t`" means <q>top</q>.
 
 ### Captured actors
 
@@ -198,23 +198,23 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
 
 <div class="tab-content">
   <div class="tab-pane fade active in" id="data_fields-board_state-startpos_examples-janggi">
-    <pre><code class="feen">rmes1semr/4g4/1p5p1/j1j1j1j1j/9/9/J1J1J1J1J/1P5P1/4G4/RMES1SEMR b - - -</code></pre>
+    <pre><code class="feen">rmes1semr/4g4/1p5p1/j1j1j1j1j/9/9/J1J1J1J1J/1P5P1/4G4/RMES1SEMR B - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-makruk">
-    <pre><code class="feen">rnbqkbnr/8/pppppppp/8/8/PPPPPPPP/8/RNBKQBNR b - - -</code></pre>
+    <pre><code class="feen">rnbqkbnr/8/pppppppp/8/8/PPPPPPPP/8/RNBKQBNR B - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-shogi">
-    <pre><code class="feen">lnsg_kgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSG_KGSNL b - - -</code></pre>
+    <pre><code class="feen">lnsg_kgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSG_KGSNL B - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-western">
-    <pre><code class="feen">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b - 0,7,56,63 -</code></pre>
+    <pre><code class="feen">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR B - 0,7,56,63 -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-xiangqi">
-    <pre><code class="feen">rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR b - - -</code></pre>
+    <pre><code class="feen">rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR B - - -</code></pre>
   </div>
 </div>
 
@@ -222,7 +222,7 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
 
 Given the following position between two Western players:
 
-    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ b - 0,7,56,63 -
+    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ B - 0,7,56,63 -
 
 When this action (in [<abbr title="Portable Action Notation">PAN</abbr> format](Portable-Action-Notation)) is applied:
 
