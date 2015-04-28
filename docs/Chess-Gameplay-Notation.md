@@ -22,7 +22,7 @@ A general purpose ASCII-based format for storing patterns defined through the ab
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the CGN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -174,7 +174,7 @@ The CGN of Western and Xiangqi Rooks on a two-dimensional board is the same:
     t<self>_&_^shift[1,0]_=_@f+all~_@f+all%self. \
     t<self>_&_^shift[1,0]_=_@f+all~_@f+all%self; t<self>_&_^capture[1,0]1=_@f+all~_@an_enemy_actor+all%self.
 
-* * *
+***
 
 <div class="sub-title">See also</div>
 

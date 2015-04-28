@@ -22,7 +22,7 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the GAN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -215,7 +215,7 @@ To avoid confusion between sides and players, _the player who moves first_ is re
 | Janggi General, Red               | top    | "`j:_g`"              |
 | Dai Dai Shogi Phoenix, Sente      | bottom | "`DAI_DAI_SHOGI:PH`"  |
 
-* * *
+***
 
 <div class="sub-title">See also</div>
 

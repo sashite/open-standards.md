@@ -22,7 +22,7 @@ A general purpose JSON-based format for storing actions of most abstract strateg
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the PAN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -219,7 +219,7 @@ List of actions of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 44. `[ "capture", 6, 21 ]`
 45. `[ "shift", 19, 12 ]`
 
-* * *
+***
 
 <div class="sub-title">See also</div>
 

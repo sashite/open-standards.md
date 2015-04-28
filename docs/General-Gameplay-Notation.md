@@ -22,7 +22,7 @@ A general purpose JSON-based format for storing patterns defined through the abs
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the GGN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -630,7 +630,7 @@ The GGN of Western and Xiangqi Rooks on a two-dimensional board is the same:
       ]
     ]
 
-* * *
+***
 
 <div class="sub-title">See also</div>
 

@@ -22,7 +22,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the FEEN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -232,7 +232,7 @@ Then the position becomes:
 
     ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/4♙3/8/♙♙♙♙1♙♙♙/♖♘♗♕♔♗♘♖ t - 0,7,56,63 -
 
-* * *
+***
 
 <!-- div class="sub-title">See also</div>
 

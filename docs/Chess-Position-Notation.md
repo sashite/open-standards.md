@@ -22,7 +22,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   This is a beta document and may be updated at any time.
 </div>
 
-* * *
+***
 
 <div class="sub-title">Abstract</div>
 
@@ -36,7 +36,7 @@ This document is a beta of the CPN specification.
 
 The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
 
-* * *
+***
 
 ## Introduction
 
@@ -90,7 +90,7 @@ The position of boards can be named by a unique identifier, the <abbr title="Che
 
 This unique identifier is computed from the SHA1 of a CGN string.
 
-* * *
+***
 
 <!-- div class="sub-title">See also</div>
 
