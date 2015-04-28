@@ -4,10 +4,10 @@ A general purpose <abbr title="JavaScript Object Notation">JSON</abbr>-based for
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2013-09-28T01:23:45Z">28 September 2013</time></dd>
+  <dd><time datetime="2013-09-28T01:23:45Z">September 28, 2013</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2013-10-18T23:42:34Z">18 October 2013</time></dd>
+  <dd><time datetime="2013-10-18T23:42:34Z">October 18, 2013</time></dd>
 
   <dt>Status</dt>
   <dd>alpha</dd>

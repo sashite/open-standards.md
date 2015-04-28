@@ -4,10 +4,10 @@ A general purpose <abbr title="American Standard Code for Information Interchang
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2013-06-14T23:17:44Z">14 June 2014</time></dd>
+  <dd><time datetime="2013-06-14T23:17:44Z">June 14, 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">28 June 2014</time></dd>
+  <dd><time datetime="2014-06-28T23:42:34Z">June 28, 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>

@@ -4,10 +4,10 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2012-05-04T01:23:45Z">4 May 2012</time></dd>
+  <dd><time datetime="2012-05-04T01:23:45Z">May 4, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-16T23:42:34Z">16 July 2014</time></dd>
+  <dd><time datetime="2014-07-16T23:42:34Z">July 16, 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>

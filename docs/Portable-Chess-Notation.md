@@ -4,10 +4,10 @@ A general purpose JSON-based format for recording chess variants' games.
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2012-08-05T01:23:45Z">5 August 2012</time></dd>
+  <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-16T23:42:34Z">16 July 2014</time></dd>
+  <dd><time datetime="2014-07-16T23:42:34Z">July 16, 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>

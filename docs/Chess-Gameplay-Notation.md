@@ -4,10 +4,10 @@ A general purpose ASCII-based format for storing patterns defined through the ab
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2014-06-15T01:23:45Z">15 June 2014</time></dd>
+  <dd><time datetime="2014-06-15T01:23:45Z">June 15, 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
+  <dd><time datetime="2014-07-11T23:42:34Z">July 11, 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>

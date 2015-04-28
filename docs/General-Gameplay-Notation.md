@@ -4,10 +4,10 @@ A general purpose JSON-based format for storing patterns defined through the abs
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
-  <dd><time datetime="2014-03-08T01:23:45Z">8 March 2014</time></dd>
+  <dd><time datetime="2014-03-08T01:23:45Z">March 8, 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-11T23:42:34Z">11 July 2014</time></dd>
+  <dd><time datetime="2014-07-11T23:42:34Z">July 11, 2014</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
