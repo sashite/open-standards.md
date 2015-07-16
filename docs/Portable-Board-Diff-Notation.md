@@ -7,7 +7,7 @@ A general purpose JSON-based format for storing changes between actions of most 
   <dd><time datetime="2015-07-15T01:23:45Z">July 15, 2015</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-07-15T23:42:34Z">July 15, 2014</time></dd>
+  <dd><time datetime="2015-07-15T23:42:34Z">July 15, 205</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
