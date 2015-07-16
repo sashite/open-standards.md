@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-16T23:42:34Z">July 16, 2014</time></dd>
+  <dd><time datetime="2015-07-16T23:42:34Z">July 16, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -85,14 +85,15 @@ When serving PCN over HTTP, the media type "`application/vnd.pcn+json`" is RECOM
 The JSON structure below shows the format of the resource:
 
     {
-      "side_bottom_name": {a string},
-      "side_bottom_rating°": {an unsigned integer},
-      "side_bottom_draw_offer?": {a boolean},
-      "side_top_name": {a string},
-      "side_top_rating°": {an unsigned integer},
-      "side_top_draw_offer?": {a boolean},
+      "topside_style": {a string},
+      "bottomside_style": {a string},
+      "topside_player": {a string},
+      "bottomside_player": {a string},
+      "topside_rating": {an unsigned integer},
+      "bottomside_rating": {an unsigned integer},
       "state": {a string},
       "started_at": {a datetime},
+      "indexes": {an array},
       "startpos": {an array},
       "moves": {an array},
       "version": {a string}
@@ -104,49 +105,46 @@ The following table defines the properties that appear in this resource:
 
 | Property name   | Value                | Description |
 | --------------- | -------------------- | ----------- |
-| "`side_bottom_name`"        | a string            | The name of bottom. |
-| "`side_bottom_rating°`"     | an unsigned integer | The rating of bottom. |
-| "`side_bottom_draw_offer?`" | a boolean           | The draw offer request of bottom. |
-| "`side_top_name`"           | a string            | The name of top. |
-| "`side_top_rating°`"        | an unsigned integer | The rating of top. |
-| "`side_top_draw_offer?`"    | a boolean           | The draw offer request of top. |
+| "`topside_style`"    | a string             | The name of topside style. |
+| "`bottomside_style`" | a string             | The name of bottomside style. |
+| "`topside_player`"    | a string            | The name of topside. |
+| "`bottomside_player`" | a string            | The name of bottomside. |
+| "`topside_rating`"    | an unsigned integer | The rating of topside. |
+| "`bottomside_rating`" | an unsigned integer | The rating of bottomside. |
 | "`state`"       | a string             | Indicates the state of the game. |
 | "`started_at`"  | a datetime           | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
+| "`indexes`"    | an array             | The shape of the board. |
 | "`startpos`"    | an array             | List of squares that identify actors on the board's starting position. |
 | "`moves`"       | an array             | List of moves associated with the game. |
 | "`version`"     | a string             | Version number of the current PCN document.  The value is specified in [Semantic Versioning 2.0.0](//semver.org/spec/v2.0.0.html) format. |
 
-### Bottom-side's name
+### Top-side player style
 
-The reserved "`side_bottom_name`" property is RECOMMENDED.
+The reserved "`topside_style`" property is RECOMMENDED.
 
-As in [GAN](General-Actor-Notation)'s <q>Naming the sides</q>, _the player who moves first_ is referred to as **bottom**.
+The style MAY be: "`shogi`", "`western`", "`xiangqi`".
 
-### Bottom-side's rating
+### Bottom-side player style
 
-The reserved "`side_bottom_rating°`" property is RECOMMENDED.
+The reserved "`bottomside_style`" property is RECOMMENDED.
 
-The rating system MAY be Elo.
+### Top-side player name
 
-### Bottom-side's draw offer request
+The reserved "`topside_player`" property is RECOMMENDED.
 
-The reserved "`side_bottom_draw_offer?`" property is RECOMMENDED.
+### Bottom-side player name
 
-### Top-side's name
-
-The reserved "`side_top_name`" property is RECOMMENDED.
-
-As in [GAN](General-Actor-Notation)'s <q>Naming the sides</q>, _the player who moves second_ is referred to as **top**.
+The reserved "`bottomside_player`" property is RECOMMENDED.
 
 ### Top-side's rating
 
-The reserved "`side_top_rating°`" property is RECOMMENDED.
+The reserved "`topside_rating`" property is RECOMMENDED.
 
 The rating system MAY be Elo.
 
-### Top-side's draw offer request
+### Bottom-side's rating
 
-The reserved "`side_top_draw_offer?`" property is RECOMMENDED.
+The reserved "`bottomside_rating`" property is RECOMMENDED.
 
 ### State
 
@@ -159,6 +157,11 @@ The possible values are:
 * "`abandoned`"
 * "`time_forfeit`"
 * "`drawn_game`"
+
+and also:
+
+* "`draw_request_from_topside`"
+* "`draw_request_from_bottomside`"
 
 ### Starting datetime
 
@@ -434,11 +437,11 @@ Move to promote a Shogi <q>Pawn</q>:
 
     [ [ "shift", 1, 2 ], [ "promote", 2, "s:+p" ] ]
 
-### Rules of chess <small>governing the play of the game</small>
+### Indexes of board
 
-The reserved "`rule`" property is OPTIONAL.
+The reserved "`indexes`" property is REQUIRED.
 
-The "`rule`" property specifies the laws of chess being used.
+The "`indexes`" property specifies the shape of the board.
 
 ### Version of the document
 
@@ -451,20 +454,27 @@ The "`version`" property specifies the version of PCN being used.
 Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
-      "side_top_name":    "Lionel, Kieseritsky",
-      "side_bottom_name": "Anderssen, Adolph",
+      "topside_player":    "Lionel, Kieseritsky",
+      "bottomside_player": "Anderssen, Adolph",
+
+      "topside_rating":    null,
+      "bottomside_rating": null,
+
+      "topside_style":    "western",
+      "bottomside_style": "western",
 
       "state": "checkmate",
       "started_at": "1851-06-21T16:00:00Z",
+      "indexes": [8, 8],
       "startpos": [
-        [ "♜" , "♞" , "♝" , "♛" , "♚" , "♝" , "♞" , "♜" ],
-        [ "♟" , "♟" , "♟" , "♟" , "♟" , "♟" , "♟" , "♟" ],
-        [ null, null, null, null, null, null, null, null],
-        [ null, null, null, null, null, null, null, null],
-        [ null, null, null, null, null, null, null, null],
-        [ null, null, null, null, null, null, null, null],
-        [ "♙" , "♙" , "♙" , "♙" , "♙" , "♙" , "♙" , "♙" ],
-        [ "♖" , "♘" , "♗" , "♕" , "♔" , "♗" , "♘" , "♖" ]
+        "♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜",
+        "♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟",
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        "♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙",
+        "♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"
       ],
       "moves": [
         [[ "shift", 52, 36 ]],
@@ -513,7 +523,6 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ "capture", 6, 21 ]],
         [[ "shift", 19, 12 ]]
       ],
-      "rule": "20140101",
       "version": "1.0.0"
     }
 

@@ -122,5 +122,22 @@
       "shogi",
       "xiangqi"
     ]
+  },
+  "Portable-Board-Diff-Notation.md": {
+    "title": "Portable Board Diff Notation",
+    "description": "Specifications and implementation guide to represent changes between actions, from most abstract strategy board games.",
+    "tags": [
+      "board",
+      "board games",
+      "chess",
+      "chessboard",
+      "actor",
+      "go",
+      "move",
+      "piece",
+      "position",
+      "shogi",
+      "xiangqi"
+    ]
   }
 }
