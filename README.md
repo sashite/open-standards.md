@@ -1,4 +1,4 @@
-# Open standards
+# Sashite Open Standards
 
 [Sashite](http://www.sashite.com/) collection of _open standards_ to build cutting edge **chess** software games, designed for the main **chess variants**.
 
