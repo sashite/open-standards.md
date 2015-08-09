@@ -372,6 +372,10 @@ Then the position becomes:
       [ null, null, null, null, null, null ]
     ]
 
+<div class="alert alert-info">
+  By default, the source square of the dropped actors SHOULD be equal to the destination square.
+</div>
+
 #### Capture <small>an actor</small>
 
 Let's detach an opponent's actor from the board by taking it with a friendly actor:
