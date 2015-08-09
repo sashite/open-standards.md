@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-08-09T23:42:34Z">August 9, 2015</time></dd>
+  <dd><time datetime="2015-08-10T23:42:34Z">August 10, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -116,6 +116,7 @@ The following table defines the properties that appear in this resource:
 | "`indexes`"    | an array             | The shape of the board. |
 | "`startpos`"    | an array             | List of squares that identify actors on the board's starting position. |
 | "`moves`"       | an array             | List of moves associated with the game. |
+| "`variant`"     | a string             | The name of the chess variant. |
 | "`version`"     | a string             | Version number of the current PCN document.  The value is specified in [Semantic Versioning 2.0.0](//semver.org/spec/v2.0.0.html) format. |
 
 ### Top-side player style
@@ -451,6 +452,14 @@ The reserved "`indexes`" property is REQUIRED.
 
 The "`indexes`" property specifies the shape of the board.
 
+### Variant of the game
+
+The reserved "`variant`" property is REQUIRED.
+
+The "`variant`" property specifies the chess variant of game being played.
+
+The value MAY be: "`gungi`", "`janggi`", "`makruk`", "`shogi`", "`western`", "`xiangqi`".
+
 ### Version of the document
 
 The reserved "`version`" property is REQUIRED.
@@ -531,6 +540,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ 6, 21, "♞" ]],
         [[ 19, 12, "♗" ]]
       ],
+      "variant": "western",
       "version": "1.0.0"
     }
 
