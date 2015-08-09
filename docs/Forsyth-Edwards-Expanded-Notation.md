@@ -7,7 +7,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   <dd><time datetime="2013-03-29T23:17:44Z">March 29, 2013</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-04-29T23:42:34Z">April 29, 2015</time></dd>
+  <dd><time datetime="2015-08-09T23:42:34Z">August 9, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -224,9 +224,9 @@ Given the following position between two Western players:
 
     ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ B - 0,7,56,63 -
 
-When this action (in [<abbr title="Portable Action Notation">PAN</abbr> format](Portable-Action-Notation)) is applied:
+When this action (in [<abbr title="Portable Board Diff Notation">PBDN</abbr> format](Portable-Board-Diff-Notation)) is applied:
 
-    [ "shift", 52, 36 ]
+    [ 52, 36, "♙" ]
 
 Then the position becomes:
 

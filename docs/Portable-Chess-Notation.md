@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-07-16T23:42:34Z">July 16, 2015</time></dd>
+  <dd><time datetime="2015-08-09T23:42:34Z">August 9, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -40,7 +40,7 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 ## Introduction
 
-<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Action Notation">PAN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
+<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Board Diff Notation">PBDN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
 
 Able to describe both multidimensional starting positions and related moves, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
 
@@ -330,15 +330,19 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 
 The reserved "`moves`" property is REQUIRED.
 
-The moves themselves are given as an ordered set of _actions_ in [portable action notation](Portable-Action-Notation).  A move MUST contain at least one action.
+The moves themselves are given as an ordered set of _actions_ in [portable board diff notation](Portable-Board-Diff-Notation).  A move MUST contain at least one action.
 
-For example, the following move is composed of 2 actions:
+For example, given the following move composed of 1 action:
 
-    [ [ "capture", 42, 43 ], [ "promote", 43, "S:+R" ] ]
+    [[ 42, 43, "S:+R" ]]
 
 It can be translated into:
 
-> Capture, using the actor on the coordinate 42, the actor on the coordinate 43; and then promote this capturing actor into <q>Shogi promoted Rook</q>.
+> Move from the coordinate 42 to the coordinate 43 the <q>Shogi promoted Rook</q>.
+
+<div class="alert alert-info">
+  Depending of the context, given by the board and the state of the game, this move MAY be a capture, it MAY be concluded by a promotion, and it MAY be a drop.
+</div>
 
 <div class="sub-title">Several scenarios</div>
 
@@ -357,7 +361,7 @@ Given the following position:
 
 When this move, consisting of one action, is played:
 
-    [ [ "drop", 2, "S:R" ] ]
+    [[ 2, 2, "S:R" ]]
 
 Then the position becomes:
 
@@ -384,7 +388,7 @@ Given the following position:
 
 When this move, consisting of one action, is played:
 
-    [ [ "capture", 0, 1 ] ]
+    [[ 0, 1, "s:r" ]]
 
 Then the position becomes:
 
@@ -415,7 +419,7 @@ Given the following position:
 
 When this move is played:
 
-    [ [ "shift", 0, 6 ] ]
+    [[ 0, 6, "x:r" ]]
 
 Then the position becomes:
 
@@ -431,11 +435,11 @@ Then the position becomes:
 
 Move to promote a Western <q>Pawn</q> to a <q>Queen</q>:
 
-    [ [ "shift", 15, 20 ], [ "promote", 20, "w:q" ] ]
+    [[ 15, 20, "w:q" ]]
 
 Move to promote a Shogi <q>Pawn</q>:
 
-    [ [ "shift", 1, 2 ], [ "promote", 2, "s:+p" ] ]
+    [[ 1, 2, "s:+p" ]]
 
 ### Indexes of board
 
@@ -477,51 +481,51 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         "♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"
       ],
       "moves": [
-        [[ "shift", 52, 36 ]],
-        [[ "shift", 12, 28 ]],
-        [[ "shift", 53, 37 ]],
-        [[ "capture", 28, 37 ]],
-        [[ "shift", 61, 34 ]],
-        [[ "shift", 3, 39 ]],
-        [[ "shift", 60, 61 ]],
-        [[ "shift", 9, 25 ]],
-        [[ "capture", 34, 25 ]],
-        [[ "shift", 6, 21 ]],
-        [[ "shift", 62, 45 ]],
-        [[ "shift", 39, 23 ]],
-        [[ "shift", 51, 43 ]],
-        [[ "shift", 21, 31 ]],
-        [[ "shift", 45, 39 ]],
-        [[ "shift", 23, 30 ]],
-        [[ "shift", 39, 29 ]],
-        [[ "shift", 10, 18 ]],
-        [[ "shift", 54, 38 ]],
-        [[ "shift", 31, 21 ]],
-        [[ "shift", 63, 62 ]],
-        [[ "capture", 18, 25 ]],
-        [[ "shift", 55, 39 ]],
-        [[ "shift", 30, 22 ]],
-        [[ "shift", 39, 31 ]],
-        [[ "shift", 22, 30 ]],
-        [[ "shift", 59, 45 ]],
-        [[ "shift", 21, 6 ]],
-        [[ "capture", 58, 37 ]],
-        [[ "shift", 30, 21 ]],
-        [[ "shift", 57, 42 ]],
-        [[ "shift", 5, 26 ]],
-        [[ "shift", 42, 27 ]],
-        [[ "capture", 21, 49 ]],
-        [[ "shift", 37, 19 ]],
-        [[ "capture", 26, 62 ]],
-        [[ "shift", 36, 28 ]],
-        [[ "capture", 49, 56 ]],
-        [[ "shift", 61, 52 ]],
-        [[ "shift", 1, 16 ]],
-        [[ "capture", 29, 14 ]],
-        [[ "shift", 4, 3 ]],
-        [[ "shift", 45, 21 ]],
-        [[ "capture", 6, 21 ]],
-        [[ "shift", 19, 12 ]]
+        [[ 52, 36, "W:P" ]],
+        [[ 12, 28, "w:p" ]],
+        [[ 53, 37, "W:P" ]],
+        [[ 28, 37, "w:p" ]],
+        [[ 61, 34, "W:B" ]],
+        [[ 3, 39, "w:q" ]],
+        [[ 60, 61, "W:K" ]],
+        [[ 9, 25, "w:p" ]],
+        [[ 34, 25, "W:B" ]],
+        [[ 6, 21, "w:n" ]],
+        [[ 62, 45, "W:N" ]],
+        [[ 39, 23, "w:q" ]],
+        [[ 51, 43, "W:P" ]],
+        [[ 21, 31, "w:n" ]],
+        [[ 45, 39, "W:N" ]],
+        [[ 23, 30, "w:q" ]],
+        [[ 39, 29, "W:N" ]],
+        [[ 10, 18, "w:p" ]],
+        [[ 54, 38, "W:P" ]],
+        [[ 31, 21, "w:n" ]],
+        [[ 63, 62, "W:R" ]],
+        [[ 18, 25, "w:p" ]],
+        [[ 55, 39, "W:P" ]],
+        [[ 30, 22, "w:q" ]],
+        [[ 39, 31, "W:P" ]],
+        [[ 22, 30, "w:q" ]],
+        [[ 59, 45, "W:Q" ]],
+        [[ 21, 6, "w:n" ]],
+        [[ 58, 37, "W:B" ]],
+        [[ 30, 21, "w:q" ]],
+        [[ 57, 42, "W:N" ]],
+        [[ 5, 26, "w:b" ]],
+        [[ 42, 27, "W:N" ]],
+        [[ 21, 49, "w:q" ]],
+        [[ 37, 19, "W:B" ]],
+        [[ 26, 62, "w:b" ]],
+        [[ 36, 28, "W:P" ]],
+        [[ 49, 56, "w:q" ]],
+        [[ 61, 52, "W:K" ]],
+        [[ 1, 16, "w:n" ]],
+        [[ 29, 14, "W:N" ]],
+        [[ 4, 3, "w:k" ]],
+        [[ 45, 21, "W:Q" ]],
+        [[ 6, 21, "w:n" ]],
+        [[ 19, 12, "W:B" ]]
       ],
       "version": "1.0.0"
     }
@@ -536,7 +540,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
 
 This work is influenced by several documents.
 
-* [Portable Action Notation](Portable-Action-Notation)
+* [Portable Board Diff Notation](Portable-Board-Diff-Notation)
 * [Portable Game Notation](//www.saremba.de/chessgml/standards/pgn/pgn-complete.htm)
 
 <div class="sub-title">Contributing</div>
