@@ -1,6 +1,6 @@
 # Forsyth–Edwards Expanded Notation <small>Specification and Implementation Guide</small>
 
-A general purpose <abbr title="American Standard Code for Information Interchange">ASCII</abbr>-based format for defining chess variants' board positions.
+A general purpose <abbr title="Universal Character Set Transformation Format - 8 bits">UTF-8</abbr>-based format for defining chess variants' board positions.
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
@@ -40,7 +40,7 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 ## Introduction
 
-<abbr title="Forsyth–Edwards Expanded Notation">FEEN</abbr> (<q>Forsyth–Edwards Expanded Notation</q>) is a lightweight, <abbr title="American Standard Code for Information Interchange">ASCII</abbr>-based format that gives a consistent and easy way to represent most chessboard positions between two-players.
+<abbr title="Forsyth–Edwards Expanded Notation">FEEN</abbr> (<q>Forsyth–Edwards Expanded Notation</q>) is a lightweight, <abbr title="Universal Character Set Transformation Format - 8 bits">UTF-8</abbr>-based format that gives a consistent and easy way to represent most chessboard positions between two-players.
 
 Inspired by <abbr title="Forsyth–Edwards Notation">FEN</abbr> (<q>Forsyth–Edwards Notation</q>), FEEN is able to describe both multidimensional positions and related state, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main chess variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi), and many others.  These properties make FEEN an ideal data-interchange format for recording chessboard positions.
 
@@ -60,10 +60,8 @@ A specification for a Forsyth–Edwards expanded notation MUST observe the follo
   * The system MUST be cross-variants.
     It SHOULD be able to represent boards where sides MAY play
     different chess variants such as Janggi, Makruk, Shogi, Western, Xiangqi.
-  * The system MUST handle chessboards of any dimension.
-    Thus, it SHOULD be able to represent board dimensions such as: 2D, 3D, etc.
-  * The system MUST handle chessboards of any size.
-    Thus, it SHOULD be able to represent board sizes such as: 8x8, 9x9, 9x9x9, etc.
+  * The system MUST handle chessboards of any dimension, such as: 2D, 3D, etc.
+  * The system MUST handle chessboards of any size, such as: 8x8, 9x9, 9x9x9, etc.
 6. Finally, the system SHOULD handle the same kinds and amounts of data that are already handled by existing chess software and by print media.
 
 ## How to serve FEEN
@@ -74,15 +72,13 @@ When serving FEEN over HTTP, the media type "`application/vnd.feen`" is RECOMMEN
 
 ## <span id="resource">Notation for board positions</span>
 
-A FEEN description MUST have five fields:
+A FEEN description MUST have *three fields*:
 
 1. Flatten board
 2. Active side
 3. Captured actors
-4. Castling availability
-5. En passant
 
-Each field MUST be composed only of ASCII characters, and non-blank printing.  Adjacent fields MUST be separated by a single ASCII space character (i.e., " ").  When a field is blank, it MUST be "`-`".
+Each field MUST be composed only of UTF-8 characters, and non-blank printing.  Adjacent fields MUST be separated by a single UTF-8 space character (i.e., " ").  When a field is blank, it MUST be "`-`".
 
 The length of a FEEN position description varies somewhat according to the position and the number of actors.
 
@@ -147,29 +143,6 @@ Example from a game with two Shogi players, in a position where bottom (<ruby la
 
     GPPPPRbbpppss
 
-### Castling availability
-
-Every squares of unmoved rooks of an unmoved King MUST be listed (separated by a comma character "`,`"), if this King is able to castling (such as in Western variant).
-
-#### Example
-
-Given the following content:
-
-    0,7,63
-
-Then the "<abbr title="Western King, White">`♔`</abbr>" actor is able to perform the <em>kingside rook</em>, while the "<abbr title="Western King, Black">`♚`</abbr>" actor is able to perform the <em>kingside rook</em> and the <em>queenside rook</em>.
-
-Considering that the game is between two Western players on a 8x8 chessboard, bottom player MAY moved his Queen's "<abbr title="Western Rook, White">`♖`</abbr>" actor.
-
-### En passant
-
-[Unlike in FEN](//www.mychess.de/ChessNotation.htm), <q>en passant</q> field MUST be recorded only when there is a pawn in position to make an en passant capture.  In other words, an en passant target square MUST be given if and only if:
-
-* the last move was a pawn advance of two squares;
-* there is at least one pawn of the opposing side that may immediately execute the <q>en passant</q> capture.
-
-The reason being that is to avoid a duplicated FEEN position while both resulting positions have the same gameplay.
-
 ## Example
 
 ### Starting positions
@@ -198,23 +171,23 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
 
 <div class="tab-content">
   <div class="tab-pane fade active in" id="data_fields-board_state-startpos_examples-janggi">
-    <pre><code class="feen">rmes1semr/4g4/1p5p1/j1j1j1j1j/9/9/J1J1J1J1J/1P5P1/4G4/RMES1SEMR B - - -</code></pre>
+    <pre><code class="feen">rmes1semr/4g4/1p5p1/j1j1j1j1j/9/9/J1J1J1J1J/1P5P1/4G4/RMES1SEMR B -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-makruk">
-    <pre><code class="feen">rnbqkbnr/8/pppppppp/8/8/PPPPPPPP/8/RNBKQBNR B - - -</code></pre>
+    <pre><code class="feen">rnbqkbnr/8/pppppppp/8/8/PPPPPPPP/8/RNBKQBNR B -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-shogi">
-    <pre><code class="feen">lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL B - - -</code></pre>
+    <pre><code class="feen">lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL B -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-western">
-    <pre><code class="feen">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR B - 0,7,56,63 -</code></pre>
+    <pre><code class="feen">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR B -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-xiangqi">
-    <pre><code class="feen">rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR B - - -</code></pre>
+    <pre><code class="feen">rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR B -</code></pre>
   </div>
 </div>
 
@@ -222,7 +195,7 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
 
 Given the following position between two Western players:
 
-    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ B - 0,7,56,63 -
+    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/8/8/♙♙♙♙♙♙♙♙/♖♘♗♕♔♗♘♖ B -
 
 When this action (in [<abbr title="Portable Board Diff Notation">PBDN</abbr> format](Portable-Board-Diff-Notation)) is applied:
 
@@ -230,7 +203,7 @@ When this action (in [<abbr title="Portable Board Diff Notation">PBDN</abbr> for
 
 Then the position becomes:
 
-    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/4♙3/8/♙♙♙♙1♙♙♙/♖♘♗♕♔♗♘♖ t - 0,7,56,63 -
+    ♜♞♝♛♚♝♞♜/♟♟♟♟♟♟♟♟/8/8/4♙3/8/♙♙♙♙1♙♙♙/♖♘♗♕♔♗♘♖ t -
 
 ***
 
