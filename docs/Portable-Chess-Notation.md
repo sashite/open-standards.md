@@ -458,7 +458,7 @@ The reserved "`variant`" property is REQUIRED.
 
 The "`variant`" property specifies the chess variant of game being played.
 
-The value MAY be: "`gungi`", "`janggi`", "`makruk`", "`shogi`", "`western`", "`xiangqi`".
+The value MAY be: "`gungi`", "`janggi`", "`makruk`", "`shogi`", "`western_chess`", "`xiangqi`".
 
 ### Version of the document
 
@@ -540,7 +540,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ 6, 21, "♞" ]],
         [[ 19, 12, "♗" ]]
       ],
-      "variant": "western",
+      "variant": "western_chess",
       "version": "1.0.0"
     }
 
