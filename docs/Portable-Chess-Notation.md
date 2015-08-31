@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-08-10T23:42:34Z">August 10, 2015</time></dd>
+  <dd><time datetime="2015-08-31T23:42:34Z">August 31, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -261,34 +261,34 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 
     [
       [ "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r" ],
-      [ null, null, null, null, "j:_g", null, null, null, null ],
+      [ null, null, null, null, "j:^g", null, null, null, null ],
       [ null, "j:p", null, null, null, null, null, "j:p", null ],
       [ "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j" ],
       [ null, null, null, null, null, null, null, null, null ],
       [ null, null, null, null, null, null, null, null, null ],
       [ "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J" ],
       [ null, "J:P", null, null, null, null, null, "J:P", null ],
-      [ null, null, null, null, "J:_G", null, null, null, null ],
+      [ null, null, null, null, "J:^G", null, null, null, null ],
       [ "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R" ]
     ]
 
 ###### Makruk chessboard
 
     [
-      [ "m:r", "m:n", "m:b", "m:q", "m:_k", "m:b", "m:n", "m:r" ],
+      [ "m:r", "m:n", "m:b", "m:q", "m:^k", "m:b", "m:n", "m:r" ],
       [ null, null, null, null, null, null, null, null ],
       [ "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p" ],
       [ null, null, null, null, null, null, null, null ],
       [ null, null, null, null, null, null, null, null ],
       [ "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P" ],
       [ null, null, null, null, null, null, null, null ],
-      [ "M:R", "M:N", "M:B", "M:_K", "M:Q", "M:B", "M:N", "M:R" ]
+      [ "M:R", "M:N", "M:B", "M:^K", "M:Q", "M:B", "M:N", "M:R" ]
     ]
 
 ###### Shogi chessboard
 
     [
-      [ "s:l", "s:n", "s:s", "s:g", "s:_k", "s:g", "s:s", "s:n", "s:l" ],
+      [ "s:l", "s:n", "s:s", "s:g", "s:^k", "s:g", "s:s", "s:n", "s:l" ],
       [ null, "s:r", null, null, null, null, null, "s:b", null ],
       [ "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p" ],
       [ null, null, null, null, null, null, null, null, null ],
@@ -296,26 +296,26 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
       [ null, null, null, null, null, null, null, null, null ],
       [ "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P" ],
       [ null, "S:B", null, null, null, null, null, "S:R", null ],
-      [ "S:L", "S:N", "S:S", "S:G", "S:_K", "S:G", "S:S", "S:N", "S:L" ]
+      [ "S:L", "S:N", "S:S", "S:G", "S:^K", "S:G", "S:S", "S:N", "S:L" ]
     ]
 
 ###### Western chessboard
 
     [
-      [ "w:r", "w:n", "w:b", "w:q", "w:_k", "w:b", "w:n", "w:r" ],
+      [ "w:r", "w:n", "w:b", "w:q", "w:^k", "w:b", "w:n", "w:r" ],
       [ "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p" ],
       [ null, null, null, null, null, null, null, null ],
       [ null, null, null, null, null, null, null, null ],
       [ null, null, null, null, null, null, null, null ],
       [ null, null, null, null, null, null, null, null ],
       [ "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P" ],
-      [ "W:R", "W:N", "W:B", "W:Q", "W:_K", "W:B", "W:N", "W:R" ]
+      [ "W:R", "W:N", "W:B", "W:Q", "W:^K", "W:B", "W:N", "W:R" ]
     ]
 
 ###### Xiangqi chessboard
 
     [
-      [ "x:r", "x:h", "x:e", "x:a", "x:_g", "x:a", "x:e", "x:h", "x:r" ],
+      [ "x:r", "x:h", "x:e", "x:a", "x:^g", "x:a", "x:e", "x:h", "x:r" ],
       [ null, null, null, null, null, null, null, null, null ],
       [ null, "x:c", null, null, null, null, null, "x:c", null ],
       [ "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s" ],
@@ -324,7 +324,7 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
       [ "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S" ],
       [ null, "X:C", null, null, null, null, null, "X:C", null ],
       [ null, null, null, null, null, null, null, null, null ],
-      [ "X:R", "X:H", "X:E", "X:A", "X:_G", "X:A", "X:E", "X:H", "X:R" ]
+      [ "X:R", "X:H", "X:E", "X:A", "X:^G", "X:A", "X:E", "X:H", "X:R" ]
     ]
 
 ### Moves <small>on the chessboard</small>

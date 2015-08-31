@@ -7,7 +7,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   <dd><time datetime="2013-03-29T23:17:44Z">March 29, 2013</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-08-09T23:42:34Z">August 9, 2015</time></dd>
+  <dd><time datetime="2015-08-31T23:42:34Z">August 31, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -206,7 +206,7 @@ The reason being that is to avoid a duplicated FEEN position while both resultin
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-shogi">
-    <pre><code class="feen">lnsg_kgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSG_KGSNL B - - -</code></pre>
+    <pre><code class="feen">lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL B - - -</code></pre>
   </div>
 
   <div class="tab-pane fade" id="data_fields-board_state-startpos_examples-western">

@@ -7,7 +7,7 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
   <dd><time datetime="2012-05-04T01:23:45Z">May 4, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-07-16T23:42:34Z">July 16, 2014</time></dd>
+  <dd><time datetime="2015-08-31T23:42:34Z">August 31, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -101,7 +101,7 @@ For more exotic chess variants, we may use the full name to avoid possible namin
 
 To identify actors inside a given game, a second substring is used.
 
-It should contain a letter, which could be followed by letters and/or numbers and/or underscores.  If the actor is a <q>King</q>-like actor, the "`_`" prefix should be used; e.g., "`w:_k`" for a <q>Western King</q>.
+It should contain a letter, which could be followed by letters and/or numbers and/or underscores.  If the actor is a <q>King</q>-like actor, the "`^`" prefix should be used; e.g., "`w:^k`" for a <q>Western King</q>.
 
 For the main chess variants, the following letter abbreviations may be used:
 
@@ -109,7 +109,7 @@ For the main chess variants, the following letter abbreviations may be used:
   <dt>Janggi actors</dt>
   <dd>
     <ul>
-      <li>"<code>_g</code>" (<q>General</q>, called <span lang="ko">楚</span> for Green and <span lang="ko">漢</span> for Red)</li>
+      <li>"<code>^g</code>" (<q>General</q>, called <span lang="ko">楚</span> for Green and <span lang="ko">漢</span> for Red)</li>
       <li>"<code>s</code>" (<q>Guard</q>, called <span lang="ko">士</span>)</li>
       <li>"<code>e</code>" (<q>Elephant</q>, called <span lang="ko">象</span>)</li>
       <li>"<code>r</code>" (<q>Chariot</q>, called <span lang="ko">車</span>)</li>
@@ -121,7 +121,7 @@ For the main chess variants, the following letter abbreviations may be used:
   <dt>Makruk actors</dt>
   <dd>
     <ul>
-      <li>"<code>_k</code>" (<q>King</q>, called <span lang="th">ขุน</span>)</li>
+      <li>"<code>^k</code>" (<q>King</q>, called <span lang="th">ขุน</span>)</li>
       <li>"<code>q</code>" (<q>Queen</q>, called <span lang="th">เม็ด</span>)</li>
       <li>"<code>r</code>" (<q>Rook</q>, called <span lang="th">เรือ</span>)</li>
       <li>"<code>b</code>" (<q>Bishop</q>, called <span lang="th">โคน</span>)</li>
@@ -132,7 +132,7 @@ For the main chess variants, the following letter abbreviations may be used:
   <dt>Shogi actors</dt>
   <dd>
     <ul>
-      <li>"<code>_k</code>" (<q>King</q>, called <span lang="ja">玉</span> for Sente and <span lang="ja">王</span> for Gote)</li>
+      <li>"<code>^k</code>" (<q>King</q>, called <span lang="ja">玉</span> for Sente and <span lang="ja">王</span> for Gote)</li>
       <li>"<code>g</code>" (<q>Gold</q>, called <span lang="ja">金</span>)</li>
       <li>"<code>s</code>" (<q>Silver</q>, called <span lang="ja">銀</span>)</li>
       <li>"<code>r</code>" (<q>Rook</q>, called <span lang="ja">飛</span>)</li>
@@ -145,7 +145,7 @@ For the main chess variants, the following letter abbreviations may be used:
   <dt>Western actors</dt>
   <dd>
     <ul>
-      <li>"<code>_k</code>" (<q>King</q>)</li>
+      <li>"<code>^k</code>" (<q>King</q>)</li>
       <li>"<code>q</code>" (<q>Queen</q>)</li>
       <li>"<code>r</code>" (<q>Rook</q>)</li>
       <li>"<code>b</code>" (<q>Bishop</q>)</li>
@@ -156,7 +156,7 @@ For the main chess variants, the following letter abbreviations may be used:
   <dt>Xiangqi actors</dt>
   <dd>
     <ul>
-      <li>"<code>_g</code>" (<q>General</q>, called <span lang="zh">將</span> for Black and <span lang="zh">帥</span> for Red)</li>
+      <li>"<code>^g</code>" (<q>General</q>, called <span lang="zh">將</span> for Black and <span lang="zh">帥</span> for Red)</li>
       <li>"<code>a</code>" (<q>Advisor</q>, called <span lang="zh">士</span> for Black and <span lang="zh">仕</span> for Red)</li>
       <li>"<code>e</code>" (<q>Elephant</q>, called <span lang="zh">象</span> for Black and <span lang="zh">相</span> for Red)</li>
       <li>"<code>r</code>" (<q>Chariot</q>, called <span lang="zh">車</span> for Black and <span lang="zh">俥</span> for Red)</li>
@@ -172,7 +172,7 @@ For the main chess variants, the following letter abbreviations may be used:
 Through a promotion, the transformation of a promoted actor must be expressed by a different name; e.g., "`w:r`" (Western <q>Rook</q>) for a promoted "`w:p`" (Western <q>Pawn</q>).  If the promoted actor remains the same, the "`+`" char must be used; e.g., "`s:+b`" (Shogi <q>promoted Bishop</q>) for a promoted "`s:b`" (Shogi <q>Bishop</q>).
 
 <span class="label label-info"><q>King</q>-like actors:</span>
-Even if this is uncommon, it would be also possible to promote <q>King</q>-like actors; e.g., "`FOO:+_K`" for a <q>promoted King</q> of the Foo variant.
+Even if this is uncommon, it would be also possible to promote <q>King</q>-like actors; e.g., "`FOO:+^K`" for a <q>promoted King</q> of the Foo variant.
 
 ### Naming the sides
 
@@ -208,11 +208,11 @@ To avoid confusion between sides and players, _the player who moves first_ is re
 | Xiangqi Cannon, Black             | top    | "`x:c`"               |
 | Taikyoku Shogi Great Dragon, Gote | top    | "`taikyoku_shogi:gd`" |
 | Makruk Bishop, Black              | top    | "`m:b`"               |
-| Western King, White               | bottom | "`W:_K`"              |
+| Western King, White               | bottom | "`W:^K`"              |
 | Shogi Rook, Sente                 | bottom | "`S:R`"               |
 | Shogi promoted Rook, Sente        | bottom | "`S:+R`"              |
-| Xiangqi General, Red              | bottom | "`X:_G`"              |
-| Janggi General, Red               | top    | "`j:_g`"              |
+| Xiangqi General, Red              | bottom | "`X:^G`"              |
+| Janggi General, Red               | top    | "`j:^g`"              |
 | Dai Dai Shogi Phoenix, Sente      | bottom | "`DAI_DAI_SHOGI:PH`"  |
 
 ***
