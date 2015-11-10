@@ -100,7 +100,7 @@ The following table defines the properties that appear in this resource:
 
 #### Shift
 
-Act of transfering an actor from a source square to a destination square of the board.
+Act of transferring an actor from a source square to a destination square of the board.
 
 <div class="alert alert-warning">
   <strong>Integrity constraints with the board:</strong>
@@ -113,7 +113,7 @@ Act of transfering an actor from a source square to a destination square of the 
 
 #### Capture
 
-Act of cleaning a destination square of the board, and then transfering an actor from a source square to the cleaned square.
+Act of cleaning a destination square of the board, and then transferring an actor from a source square to the cleaned square.
 
 <span class="label label-info">Captured actors:</span>
 Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retained <q>in hand</q>.
