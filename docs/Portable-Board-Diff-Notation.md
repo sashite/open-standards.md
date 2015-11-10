@@ -7,7 +7,7 @@ A general purpose JSON-based format for storing changes between actions of most 
   <dd><time datetime="2015-07-15T01:23:45Z">July 15, 2015</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-07-15T23:42:34Z">July 15, 2015</time></dd>
+  <dd><time datetime="2015-11-10T23:42:34Z">Nov 10, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -104,7 +104,7 @@ List of changes of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 4. `[ 28, 37, "w:p" ]`
 5. `[ 61, 34, "W:B" ]`
 6. `[ 3, 39, "w:q" ]`
-7. `[ 60, 61, "W:K" ]`
+7. `[ 60, 61, "W:^K" ]`
 8. `[ 9, 25, "w:p" ]`
 9. `[ 34, 25, "W:B" ]`
 10. `[ 6, 21, "w:n" ]`
@@ -136,10 +136,10 @@ List of changes of the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_G
 36. `[ 26, 62, "w:b" ]`
 37. `[ 36, 28, "W:P" ]`
 38. `[ 49, 56, "w:q" ]`
-39. `[ 61, 52, "W:K" ]`
+39. `[ 61, 52, "W:^K" ]`
 40. `[ 1, 16, "w:n" ]`
 41. `[ 29, 14, "W:N" ]`
-42. `[ 4, 3, "w:k" ]`
+42. `[ 4, 3, "w:^k" ]`
 43. `[ 45, 21, "W:Q" ]`
 44. `[ 6, 21, "w:n" ]`
 45. `[ 19, 12, "W:B" ]`
