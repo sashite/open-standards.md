@@ -7,7 +7,7 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   <dd><time datetime="2013-06-14T23:17:44Z">June 14, 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2014-06-28T23:42:34Z">June 28, 2014</time></dd>
+  <dd><time datetime="2015-11-11T23:42:34Z">Nov. 11, 2015</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -40,7 +40,7 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 ## Introduction
 
-<abbr title="Chess Position Notation">CPN</abbr> (<q>Chess Position Notation</q>) is an <abbr title="Forsyth–Edwards Expanded Notation">FEEN</abbr>-based format that gives a consistent and easy way to represent most chessboard positions between two-players.
+<abbr title="Chess Position Notation">CPN</abbr> (<q>Chess Position Notation</q>) is plaintext-based format that gives a consistent and easy way to represent most chessboard positions between two-players.
 
 CPN is able to describe both multidimensional positions and related state, easy for machines to import and export, it is laws of chess dependent and compatible with the main chess variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi), and many others.  These properties make CPN an ideal data-interchange format for recording canonical chessboard positions.
 
@@ -74,17 +74,27 @@ When serving CPN over HTTP, the media type "`application/vnd.cpn+feen`" is RECOM
 
 ## <span id="resource">Notation for canonical board positions</span>
 
-Like FEEN format, a CPN description MUST have the same five fields.
+A CPN description MUST have the same four fields, joined by "`--`".
+
+### Active side
+
+This field MUST contain a single letter: "`B`" means <q>bottom</q> moves next, "`t`" means <q>top</q>.
+
+### Shape
+
+This field MUST a number for each shape, separated by a comma: "`,`". Example for a 8x8 board: "`8,8`".
 
 ### Flatten board
 
-Unlike FEEN format, actors MUST be identified by a string into [CAN format](Chess-Actor-Notation).  A vertical bar "`|`" is used to separate them.
+Actors MUST be identified in to the [GAN format](General-Actor-Notation).
 
-### Captured actors
+A comma ("`,`") is used to separate them.
 
-Unlike FEEN format, the actors are separated by a vertical bar "`|`".
+### Pieces in hand
 
-### Canonical position hash coding
+The pieces are sorted in the alphabetical order and separated by a comma ("`,`").
+
+## Canonical position hash coding
 
 The position of boards can be named by a unique identifier, the <abbr title="Chess Position Hash">CPH</abbr> (<q>Chess Position Hash</q>).
 
@@ -92,16 +102,15 @@ This unique identifier is computed from the SHA1 of a CGN string.
 
 ***
 
-<!-- div class="sub-title">See also</div>
+<div class="sub-title">See also</div>
 
-* [An implementation in Ruby](//github.com/sashite/cpn.rb) -->
+* [An implementation in Ruby](//github.com/sashite/cpn.rb)
 
 <div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
-* [<abbr title="Forsyth–Edwards Expanded Notation">FEEN</abbr> format](Forsyth-Edwards-Expanded-Notation)
-* [<abbr title="Chess-Actor-Notation">CAN</abbr> format](Chess Actor Notation)
+* [<abbr title="General-Actor-Notation">GAN</abbr> format](General-Actor-Notation)
 
 <div class="sub-title">Contributing</div>
 
