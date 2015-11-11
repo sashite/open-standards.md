@@ -98,7 +98,7 @@ The pieces are sorted in the alphabetical order and separated by a comma ("`,`")
 
 The position of boards can be named by a unique identifier, the <abbr title="Chess Position Hash">CPH</abbr> (<q>Chess Position Hash</q>).
 
-This unique identifier is computed from the SHA1 of a CGN string.
+This unique identifier is computed from the SHA1 of a CPN string.
 
 ***
 
