@@ -443,7 +443,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         "name": "Anderssen, Adolph",
         "rating": 2600,
         "remaining_time": null
-      }
+      },
 
       "state": "checkmate",
 
