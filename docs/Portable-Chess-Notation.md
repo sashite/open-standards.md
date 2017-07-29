@@ -7,13 +7,13 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-08-31T23:42:34Z">August 31, 2015</time></dd>
+  <dd><time datetime="2017-07-28T23:42:34Z">July 28, 2017</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd><a rel="external author" href="https://plus.google.com/+CyrilWack">Cyril Wack</a></dd>
+  <dd><a rel="external author" href="https://github.com/cyril">Cyril Kato</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -85,82 +85,56 @@ When serving PCN over HTTP, the media type "`application/vnd.pcn+json`" is RECOM
 The JSON structure below shows the format of the resource:
 
     {
-      "topside_style": {a string},
-      "bottomside_style": {a string},
-      "topside_player": {a string},
-      "bottomside_player": {a string},
-      "topside_rating": {an unsigned integer},
-      "bottomside_rating": {an unsigned integer},
+      "topside": {a hash},
+      "bottomside": {a hash},
       "state": {a string},
       "started_at": {a datetime},
       "indexes": {an array},
       "startpos": {an array},
-      "moves": {an array},
-      "version": {a string}
+      "moves": {an array}
     }
 
 <div class="sub-title">Properties</div>
 
 The following table defines the properties that appear in this resource:
 
-| Property name   | Value                | Description |
-| --------------- | -------------------- | ----------- |
-| "`topside_style`"    | a string             | The name of topside style. |
-| "`bottomside_style`" | a string             | The name of bottomside style. |
-| "`topside_player`"    | a string            | The name of topside. |
-| "`bottomside_player`" | a string            | The name of bottomside. |
-| "`topside_rating`"    | an unsigned integer | The rating of topside. |
-| "`bottomside_rating`" | an unsigned integer | The rating of bottomside. |
-| "`state`"       | a string             | Indicates the state of the game. |
-| "`started_at`"  | a datetime           | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
-| "`indexes`"    | an array             | The shape of the board. |
-| "`startpos`"    | an array             | List of squares that identify actors on the board's starting position. |
-| "`moves`"       | an array             | List of moves associated with the game. |
-| "`variant`"     | a string             | The name of the chess variant. |
-| "`version`"     | a string             | Version number of the current PCN document.  The value is specified in [Semantic Versioning 2.0.0](//semver.org/spec/v2.0.0.html) format. |
+| Property name   | Value      | Description |
+| --------------- | ---------- | ----------- |
+| "`topside`"     | a hash     | The name of topside style. |
+| "`bottomside`"  | a hash     | The rating of bottomside. |
+| "`state`"       | a string   | Indicates the state of the game. |
+| "`started_at`"  | a datetime | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
+| "`indexes`"     | an array   | The shape of the board. |
+| "`startpos`"    | an array   | List of squares that identify actors on the board's starting position. |
+| "`moves`"       | an array   | List of moves associated with the game. |
 
-### Top-side player style
+### Top-side & Bottom-side
 
-The reserved "`topside_style`" property is RECOMMENDED.
+The reserved "`topside`" & "`bottomside`" properties are RECOMMENDED.
 
-The style MAY be: "`shogi`", "`western`", "`xiangqi`".
+<div class="sub-title">Properties</div>
 
-### Bottom-side player style
+The following table defines the properties that appear in this resource:
 
-The reserved "`bottomside_style`" property is RECOMMENDED.
-
-### Top-side player name
-
-The reserved "`topside_player`" property is RECOMMENDED.
-
-### Bottom-side player name
-
-The reserved "`bottomside_player`" property is RECOMMENDED.
-
-### Top-side's rating
-
-The reserved "`topside_rating`" property is RECOMMENDED.
-
-The rating system MAY be Elo.
-
-### Bottom-side's rating
-
-The reserved "`bottomside_rating`" property is RECOMMENDED.
+| Property name       | Value               | Description |
+| ------------------- | ------------------- | ----------- |
+| "`name`"            | a string            | The name of the player. |
+| "`rating`"          | an unsigned integer | The rating of the player. |
+| "`remaining_time`"  | an unsigned integer | The remaining time of the player (in seconds). |
 
 ### State
 
 The reserved "`state`" property is REQUIRED.
 
-The possible values are:
+The possible values are (when the game is finished):
 
-* "`in_progress`"
-* "`checkmate`"
-* "`abandoned`"
-* "`time_forfeit`"
+* "`topside_won`"
+* "`bottomside_won`"
 * "`drawn_game`"
 
-and also:
+and (when the game is not finished):
 
+* "`in_progress`"
 * "`draw_request_from_topside`"
 * "`draw_request_from_bottomside`"
 
@@ -452,37 +426,29 @@ The reserved "`indexes`" property is REQUIRED.
 
 The "`indexes`" property specifies the shape of the board.
 
-### Variant of the game
-
-The reserved "`variant`" property is REQUIRED.
-
-The "`variant`" property specifies the chess variant of game being played.
-
-The value MAY be: "`gungi`", "`janggi`", "`makruk`", "`shogi`", "`western_chess`", "`xiangqi`".
-
-### Version of the document
-
-The reserved "`version`" property is REQUIRED.
-
-The "`version`" property specifies the version of PCN being used.
-
 ## Example
 
 Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
-      "topside_player":    "Lionel, Kieseritsky",
-      "bottomside_player": "Anderssen, Adolph",
+      "started_at": "1851-06-21T16:00:00Z",
 
-      "topside_rating":    null,
-      "bottomside_rating": null,
+      "topside": {
+        "name": "Lionel, Kieseritsky",
+        "rating": 2700,
+        "remaining_time": null
+      },
 
-      "topside_style":    "western",
-      "bottomside_style": "western",
+      "bottomside": {
+        "name": "Anderssen, Adolph",
+        "rating": 2600,
+        "remaining_time": null
+      }
 
       "state": "checkmate",
-      "started_at": "1851-06-21T16:00:00Z",
+
       "indexes": [8, 8],
+
       "startpos": [
         "♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜",
         "♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟",
@@ -493,6 +459,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         "♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙",
         "♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"
       ],
+
       "moves": [
         [[ 52, 36, "♙" ]],
         [[ 12, 28, "♟" ]],
@@ -539,9 +506,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
         [[ 45, 21, "♕" ]],
         [[ 6, 21, "♞" ]],
         [[ 19, 12, "♗" ]]
-      ],
-      "variant": "western_chess",
-      "version": "1.0.0"
+      ]
     }
 
 ***
@@ -559,4 +524,4 @@ This work is influenced by several documents.
 
 <div class="sub-title">Contributing</div>
 
-Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Portable-Chess-Notation.md) and submit a hug request.
+Want to make this page better?  [Make your changes](//github.com/sashite/specifications.md/edit/master/docs/Portable-Chess-Notation.md) and submit a hug request.

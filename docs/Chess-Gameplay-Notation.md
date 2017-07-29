@@ -13,7 +13,7 @@ A general purpose ASCII-based format for storing patterns defined through the ab
   <dd>beta</dd>
 
   <dt>Author</dt>
-  <dd><a rel="external author" href="https://plus.google.com/+CyrilWack">Cyril Wack</a></dd>
+  <dd><a rel="external author" href="https://github.com/cyril">Cyril Kato</a></dd>
 </dl>
 
 <div class="alert alert-warning">
@@ -188,4 +188,4 @@ This work is influenced by several documents.
 
 <div class="sub-title">Contributing</div>
 
-Want to make this page better?  [Make your changes](//github.com/sashite/open-standards.md/edit/master/docs/Chess-Gameplay-Notation.md) and submit a hug request.
+Want to make this page better?  [Make your changes](//github.com/sashite/specifications.md/edit/master/docs/Chess-Gameplay-Notation.md) and submit a hug request.
