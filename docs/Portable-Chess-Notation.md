@@ -146,6 +146,14 @@ The "`started_at`" property specifies the starting datetime for the game.
 
 The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format.
 
+### Indexes of board
+
+The reserved "`indexes`" property is REQUIRED.
+
+The "`indexes`" property specifies the shape of the board.
+
+This is a tuple of integers indicating the size of the array in each dimension.  For a board with `n` rows and `m` columns, "`indexes`" will be `[n, m]`.
+
 ### Starting position
 
 The reserved "`startpos`" property is REQUIRED.
@@ -154,7 +162,7 @@ The reserved "`startpos`" property is REQUIRED.
 
 Chess positions on the chessboard can be represented by an array.
 
-Even though it is unusual, it is possible to represent a chessboard from one dimension.  Each dimension can be described by an embedded array (where the first dimension SHOULD be the root array).
+Even though it is unusual, it is possible to represent a chessboard from one dimension.
 
 ##### Empty position examples
 
@@ -165,10 +173,10 @@ Even though it is unusual, it is possible to represent a chessboard from one dim
 ###### 4x8 size chessboard
 
     [
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ]
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null
     ]
 
 Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>](//en.wikipedia.org/wiki/Banqi).
@@ -176,13 +184,13 @@ Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>
 ###### 7x7 size chessboard
 
     [
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null ]
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null
     ]
 
 Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt></ruby>](//en.wikipedia.org/wiki/Tori_shogi).
@@ -190,41 +198,35 @@ Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt
 ###### 5x5x5 size chessboard
 
     [
-      [
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ]
-      ],
-      [
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ]
-      ],
-      [
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ]
-      ],
-      [
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ]
-      ],
-      [
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ],
-        [ null, null, null, null, null ]
-      ]
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null, null
     ]
 
 Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach).
@@ -234,71 +236,71 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 ###### Janggi chessboard
 
     [
-      [ "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r" ],
-      [ null, null, null, null, "j:^g", null, null, null, null ],
-      [ null, "j:p", null, null, null, null, null, "j:p", null ],
-      [ "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j" ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J" ],
-      [ null, "J:P", null, null, null, null, null, "J:P", null ],
-      [ null, null, null, null, "J:^G", null, null, null, null ],
-      [ "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R" ]
+      "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r",
+      null, null, null, null, "j:^g", null, null, null, null,
+      null, "j:p", null, null, null, null, null, "j:p", null,
+      "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J",
+      null, "J:P", null, null, null, null, null, "J:P", null,
+      null, null, null, null, "J:^G", null, null, null, null,
+      "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R"
     ]
 
 ###### Makruk chessboard
 
     [
-      [ "m:r", "m:n", "m:b", "m:q", "m:^k", "m:b", "m:n", "m:r" ],
-      [ null, null, null, null, null, null, null, null ],
-      [ "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p" ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P" ],
-      [ null, null, null, null, null, null, null, null ],
-      [ "M:R", "M:N", "M:B", "M:^K", "M:Q", "M:B", "M:N", "M:R" ]
+      "m:r", "m:n", "m:b", "m:q", "m:^k", "m:b", "m:n", "m:r",
+      null, null, null, null, null, null, null, null,
+      "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p",
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P",
+      null, null, null, null, null, null, null, null,
+      "M:R", "M:N", "M:B", "M:^K", "M:Q", "M:B", "M:N", "M:R"
     ]
 
 ###### Shogi chessboard
 
     [
-      [ "s:l", "s:n", "s:s", "s:g", "s:^k", "s:g", "s:s", "s:n", "s:l" ],
-      [ null, "s:r", null, null, null, null, null, "s:b", null ],
-      [ "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p" ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P" ],
-      [ null, "S:B", null, null, null, null, null, "S:R", null ],
-      [ "S:L", "S:N", "S:S", "S:G", "S:^K", "S:G", "S:S", "S:N", "S:L" ]
+      "s:l", "s:n", "s:s", "s:g", "s:^k", "s:g", "s:s", "s:n", "s:l",
+      null, "s:r", null, null, null, null, null, "s:b", null,
+      "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P",
+      null, "S:B", null, null, null, null, null, "S:R", null,
+      "S:L", "S:N", "S:S", "S:G", "S:^K", "S:G", "S:S", "S:N", "S:L"
     ]
 
 ###### Western chessboard
 
     [
-      [ "w:r", "w:n", "w:b", "w:q", "w:^k", "w:b", "w:n", "w:r" ],
-      [ "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p" ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null ],
-      [ "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P" ],
-      [ "W:R", "W:N", "W:B", "W:Q", "W:^K", "W:B", "W:N", "W:R" ]
+      "w:r", "w:n", "w:b", "w:q", "w:^k", "w:b", "w:n", "w:r",
+      "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p",
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P",
+      "W:R", "W:N", "W:B", "W:Q", "W:^K", "W:B", "W:N", "W:R"
     ]
 
 ###### Xiangqi chessboard
 
     [
-      [ "x:r", "x:h", "x:e", "x:a", "x:^g", "x:a", "x:e", "x:h", "x:r" ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ null, "x:c", null, null, null, null, null, "x:c", null ],
-      [ "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s" ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S" ],
-      [ null, "X:C", null, null, null, null, null, "X:C", null ],
-      [ null, null, null, null, null, null, null, null, null ],
-      [ "X:R", "X:H", "X:E", "X:A", "X:^G", "X:A", "X:E", "X:H", "X:R" ]
+      "x:r", "x:h", "x:e", "x:a", "x:^g", "x:a", "x:e", "x:h", "x:r",
+      null, null, null, null, null, null, null, null, null,
+      null, "x:c", null, null, null, null, null, "x:c", null,
+      "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S",
+      null, "X:C", null, null, null, null, null, "X:C", null,
+      null, null, null, null, null, null, null, null, null,
+      "X:R", "X:H", "X:E", "X:A", "X:^G", "X:A", "X:E", "X:H", "X:R"
     ]
 
 ### Moves <small>on the chessboard</small>
@@ -328,10 +330,10 @@ Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retai
 Given the following position:
 
     [
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 When this move, consisting of one action, is played:
@@ -341,10 +343,10 @@ When this move, consisting of one action, is played:
 Then the position becomes:
 
     [
-      [ null, null, "S:R", null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      null, null, "S:R", null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 <div class="alert alert-info">
@@ -358,11 +360,11 @@ Let's detach an opponent's actor from the board by taking it with a friendly act
 Given the following position:
 
     [
-      [ "s:r", "S:P", null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      "s:r", "S:P", null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 When this move, consisting of one action, is played:
@@ -372,11 +374,11 @@ When this move, consisting of one action, is played:
 Then the position becomes:
 
     [
-      [ null, "s:r", null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      null, "s:r", null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 <span class="label label-info">Captured actors:</span>
@@ -389,11 +391,11 @@ Let's transfer a friendly actor (<q>Xiangqi Chariot, Black</q>) from its square 
 Given the following position:
 
     [
-      [ "x:r", null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      "x:r", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 When this move is played:
@@ -403,11 +405,11 @@ When this move is played:
 Then the position becomes:
 
     [
-      [ null, null, null, null, null, null ],
-      [ "x:r", null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ],
-      [ null, null, null, null, null, null ]
+      null, null, null, null, null, null,
+      "x:r", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
     ]
 
 #### Promote <small>an actor</small>
@@ -419,12 +421,6 @@ Move to promote a Western <q>Pawn</q> to a <q>Queen</q>:
 Move to promote a Shogi <q>Pawn</q>:
 
     [[ 1, 2, "s:+p" ]]
-
-### Indexes of board
-
-The reserved "`indexes`" property is REQUIRED.
-
-The "`indexes`" property specifies the shape of the board.
 
 ## Example
 
