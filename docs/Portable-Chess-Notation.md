@@ -307,13 +307,13 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 
 The reserved "`moves`" property is REQUIRED.
 
-The moves themselves are given as an ordered set of _actions_ in [portable board diff notation](Portable-Board-Diff-Notation).  A move MUST contain at least one action.
+The moves are an ordered set of _action_ expressed into [portable board diff notation](Portable-Board-Diff-Notation).  A move MUST contain one action.
 
-For example, given the following move composed of 1 action:
+For example, the following move:
 
-    [[ 42, 43, "S:+R" ]]
+    [ 42, 43, "S:+R" ]
 
-It can be translated into:
+can be translated into:
 
 > Move from the coordinate 42 to the coordinate 43 the <q>Shogi promoted Rook</q>.
 
@@ -336,9 +336,9 @@ Given the following position:
       null, null, null, null, null, null
     ]
 
-When this move, consisting of one action, is played:
+When this move is played:
 
-    [[ 2, 2, "S:R" ]]
+    [ 2, 2, "S:R" ]
 
 Then the position becomes:
 
@@ -367,9 +367,9 @@ Given the following position:
       null, null, null, null, null, null
     ]
 
-When this move, consisting of one action, is played:
+When this move is played:
 
-    [[ 0, 1, "s:r" ]]
+    [ 0, 1, "s:r" ]
 
 Then the position becomes:
 
@@ -400,7 +400,7 @@ Given the following position:
 
 When this move is played:
 
-    [[ 0, 6, "x:r" ]]
+    [ 0, 6, "x:r" ]
 
 Then the position becomes:
 
@@ -416,11 +416,11 @@ Then the position becomes:
 
 Move to promote a Western <q>Pawn</q> to a <q>Queen</q>:
 
-    [[ 15, 20, "w:q" ]]
+    [ 15, 20, "w:q" ]
 
 Move to promote a Shogi <q>Pawn</q>:
 
-    [[ 1, 2, "s:+p" ]]
+    [ 1, 2, "s:+p" ]
 
 ## Example
 
@@ -457,51 +457,51 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
       ],
 
       "moves": [
-        [[ 52, 36, "♙" ]],
-        [[ 12, 28, "♟" ]],
-        [[ 53, 37, "♙" ]],
-        [[ 28, 37, "♟" ]],
-        [[ 61, 34, "♗" ]],
-        [[ 3, 39, "♛" ]],
-        [[ 60, 61, "♔" ]],
-        [[ 9, 25, "♟" ]],
-        [[ 34, 25, "♗" ]],
-        [[ 6, 21, "♞" ]],
-        [[ 62, 45, "♘" ]],
-        [[ 39, 23, "♛" ]],
-        [[ 51, 43, "♙" ]],
-        [[ 21, 31, "♞" ]],
-        [[ 45, 39, "♘" ]],
-        [[ 23, 30, "♛" ]],
-        [[ 39, 29, "♘" ]],
-        [[ 10, 18, "♟" ]],
-        [[ 54, 38, "♙" ]],
-        [[ 31, 21, "♞" ]],
-        [[ 63, 62, "♖" ]],
-        [[ 18, 25, "♟" ]],
-        [[ 55, 39, "♙" ]],
-        [[ 30, 22, "♛" ]],
-        [[ 39, 31, "♙" ]],
-        [[ 22, 30, "♛" ]],
-        [[ 59, 45, "♕" ]],
-        [[ 21, 6, "♞" ]],
-        [[ 58, 37, "♗" ]],
-        [[ 30, 21, "♛" ]],
-        [[ 57, 42, "♘" ]],
-        [[ 5, 26, "♝" ]],
-        [[ 42, 27, "♘" ]],
-        [[ 21, 49, "♛" ]],
-        [[ 37, 19, "♗" ]],
-        [[ 26, 62, "♝" ]],
-        [[ 36, 28, "♙" ]],
-        [[ 49, 56, "♛" ]],
-        [[ 61, 52, "♔" ]],
-        [[ 1, 16, "♞" ]],
-        [[ 29, 14, "♘" ]],
-        [[ 4, 3, "♚" ]],
-        [[ 45, 21, "♕" ]],
-        [[ 6, 21, "♞" ]],
-        [[ 19, 12, "♗" ]]
+        [ 52, 36, "♙" ],
+        [ 12, 28, "♟" ],
+        [ 53, 37, "♙" ],
+        [ 28, 37, "♟" ],
+        [ 61, 34, "♗" ],
+        [ 3, 39, "♛" ],
+        [ 60, 61, "♔" ],
+        [ 9, 25, "♟" ],
+        [ 34, 25, "♗" ],
+        [ 6, 21, "♞" ],
+        [ 62, 45, "♘" ],
+        [ 39, 23, "♛" ],
+        [ 51, 43, "♙" ],
+        [ 21, 31, "♞" ],
+        [ 45, 39, "♘" ],
+        [ 23, 30, "♛" ],
+        [ 39, 29, "♘" ],
+        [ 10, 18, "♟" ],
+        [ 54, 38, "♙" ],
+        [ 31, 21, "♞" ],
+        [ 63, 62, "♖" ],
+        [ 18, 25, "♟" ],
+        [ 55, 39, "♙" ],
+        [ 30, 22, "♛" ],
+        [ 39, 31, "♙" ],
+        [ 22, 30, "♛" ],
+        [ 59, 45, "♕" ],
+        [ 21, 6, "♞" ],
+        [ 58, 37, "♗" ],
+        [ 30, 21, "♛" ],
+        [ 57, 42, "♘" ],
+        [ 5, 26, "♝" ],
+        [ 42, 27, "♘" ],
+        [ 21, 49, "♛" ],
+        [ 37, 19, "♗" ],
+        [ 26, 62, "♝" ],
+        [ 36, 28, "♙" ],
+        [ 49, 56, "♛" ],
+        [ 61, 52, "♔" ],
+        [ 1, 16, "♞" ],
+        [ 29, 14, "♘" ],
+        [ 4, 3, "♚" ],
+        [ 45, 21, "♕" ],
+        [ 6, 21, "♞" ],
+        [ 19, 12, "♗" ]
       ]
     }
 
