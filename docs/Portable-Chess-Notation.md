@@ -100,8 +100,8 @@ The following table defines the properties that appear in this resource:
 
 | Property name   | Value      | Description |
 | --------------- | ---------- | ----------- |
-| "`topside`"     | a hash     | The name of topside style. |
-| "`bottomside`"  | a hash     | The rating of bottomside. |
+| "`topside`"     | a hash     | The topside player. |
+| "`bottomside`"  | a hash     | The bottomside player. |
 | "`state`"       | a string   | Indicates the state of the game. |
 | "`started_at`"  | a datetime | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
 | "`indexes`"     | an array   | The shape of the board. |
