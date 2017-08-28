@@ -516,7 +516,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
 This work is influenced by several documents.
 
 * [Portable Board Diff Notation](Portable-Board-Diff-Notation)
-* [Portable Game Notation](//www.saremba.de/chessgml/standards/pgn/pgn-complete.htm)
+* [Portable Game Notation](https://www.chessclub.com/user/help/PGN-spec)
 
 <div class="sub-title">Contributing</div>
 
