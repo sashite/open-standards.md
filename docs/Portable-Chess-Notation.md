@@ -7,7 +7,7 @@ A general purpose JSON-based format for recording chess variants' games.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2017-07-28T23:42:34Z">July 28, 2017</time></dd>
+  <dd><time datetime="2019-08-05T17:29:55Z">August 5, 2019</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
@@ -237,34 +237,34 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 
     [
       "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r",
-      null, null, null, null, "j:^g", null, null, null, null,
+      null, null, null, null, "j:-g", null, null, null, null,
       null, "j:p", null, null, null, null, null, "j:p", null,
       "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j",
       null, null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null,
       "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J",
       null, "J:P", null, null, null, null, null, "J:P", null,
-      null, null, null, null, "J:^G", null, null, null, null,
+      null, null, null, null, "J:-G", null, null, null, null,
       "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R"
     ]
 
 ###### Makruk chessboard
 
     [
-      "m:r", "m:n", "m:b", "m:q", "m:^k", "m:b", "m:n", "m:r",
+      "m:r", "m:n", "m:b", "m:q", "m:-k", "m:b", "m:n", "m:r",
       null, null, null, null, null, null, null, null,
       "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p",
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P",
       null, null, null, null, null, null, null, null,
-      "M:R", "M:N", "M:B", "M:^K", "M:Q", "M:B", "M:N", "M:R"
+      "M:R", "M:N", "M:B", "M:-K", "M:Q", "M:B", "M:N", "M:R"
     ]
 
 ###### Shogi chessboard
 
     [
-      "s:l", "s:n", "s:s", "s:g", "s:^k", "s:g", "s:s", "s:n", "s:l",
+      "s:l", "s:n", "s:s", "s:g", "s:-k", "s:g", "s:s", "s:n", "s:l",
       null, "s:r", null, null, null, null, null, "s:b", null,
       "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p",
       null, null, null, null, null, null, null, null, null,
@@ -272,26 +272,26 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
       null, null, null, null, null, null, null, null, null,
       "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P",
       null, "S:B", null, null, null, null, null, "S:R", null,
-      "S:L", "S:N", "S:S", "S:G", "S:^K", "S:G", "S:S", "S:N", "S:L"
+      "S:L", "S:N", "S:S", "S:G", "S:-K", "S:G", "S:S", "S:N", "S:L"
     ]
 
 ###### Western chessboard
 
     [
-      "w:r", "w:n", "w:b", "w:q", "w:^k", "w:b", "w:n", "w:r",
+      "w:r", "w:n", "w:b", "w:q", "w:-k", "w:b", "w:n", "w:r",
       "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p",
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P",
-      "W:R", "W:N", "W:B", "W:Q", "W:^K", "W:B", "W:N", "W:R"
+      "W:R", "W:N", "W:B", "W:Q", "W:-K", "W:B", "W:N", "W:R"
     ]
 
 ###### Xiangqi chessboard
 
     [
-      "x:r", "x:h", "x:e", "x:a", "x:^g", "x:a", "x:e", "x:h", "x:r",
+      "x:r", "x:h", "x:e", "x:a", "x:-g", "x:a", "x:e", "x:h", "x:r",
       null, null, null, null, null, null, null, null, null,
       null, "x:c", null, null, null, null, null, "x:c", null,
       "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s",
@@ -300,7 +300,7 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
       "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S",
       null, "X:C", null, null, null, null, null, "X:C", null,
       null, null, null, null, null, null, null, null, null,
-      "X:R", "X:H", "X:E", "X:A", "X:^G", "X:A", "X:E", "X:H", "X:R"
+      "X:R", "X:H", "X:E", "X:A", "X:-G", "X:A", "X:E", "X:H", "X:R"
     ]
 
 ### Moves <small>on the chessboard</small>
@@ -515,7 +515,7 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
 
 This work is influenced by several documents.
 
-* [Portable Board Diff Notation](Portable-Board-Diff-Notation)
+* [Portable Board Diff Notation](Portable-Board-Diff-Notation.md)
 * [Portable Game Notation](https://www.chessclub.com/user/help/PGN-spec)
 
 <div class="sub-title">Contributing</div>

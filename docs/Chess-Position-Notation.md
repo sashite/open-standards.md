@@ -110,7 +110,7 @@ This unique identifier is computed from the SHA1 of a CPN string.
 
 This work is influenced by several documents.
 
-* [<abbr title="General-Actor-Notation">GAN</abbr> format](General-Actor-Notation)
+* [<abbr title="General-Actor-Notation">GAN</abbr> format](General-Actor-Notation.md)
 
 <div class="sub-title">Contributing</div>
 

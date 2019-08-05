@@ -1,6 +1,6 @@
 # Sashite Specifications
 
-[Sashite](http://www.sashite.com/) collection of specifications to build cutting edge **chess** software games, designed for the main **chess variants**.
+[Sashite](https://sashite.com/) collection of specifications to build cutting edge **chess** software games, designed for the main **chess variants**.
 
 ## Chess variants
 

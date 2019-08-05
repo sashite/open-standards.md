@@ -640,7 +640,7 @@ The GGN of Western and Xiangqi Rooks on a two-dimensional board is the same:
 
 This work is influenced by several documents.
 
-* [Portable Action Notation](Portable-Action-Notation)
+* [Portable Action Notation](Portable-Action-Notation.md)
 
 <div class="sub-title">Contributing</div>
 

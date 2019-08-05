@@ -14,38 +14,6 @@
       "xiangqi"
     ]
   },
-  "Chess-Actor-Notation.md": {
-    "title": "Chess Actor Notation",
-    "description": "Specifications and implementation guide to represent a canonical actor, preventing from duplicates, as defined through the rules of chess.",
-    "tags": [
-      "board",
-      "canonical actor",
-      "chess",
-      "chessboard",
-      "game",
-      "go",
-      "position",
-      "rules of chess",
-      "shogi",
-      "xiangqi"
-    ]
-  },
-  "Chess-Gameplay-Notation.md": {
-    "title": "Chess Gameplay Notation",
-    "description": "Specifications and implementation guide to represent a canonical gameplay, preventing from duplicates, as defined through the rules of chess.",
-    "tags": [
-      "board",
-      "canonical gameplay",
-      "chess",
-      "chessboard",
-      "game",
-      "go",
-      "position",
-      "rules of chess",
-      "shogi",
-      "xiangqi"
-    ]
-  },
   "Forsyth-Edwards-Expanded-Notation.md": {
     "title": "Forsyth–Edwards Expanded Notation",
     "description": "Specifications and implementation guide to represent a particular board position in any number of dimensions, as a picture of the game at a given moment.",
