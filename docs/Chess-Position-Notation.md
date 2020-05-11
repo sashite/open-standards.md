@@ -1,4 +1,4 @@
-# Chess Position Notation <small>Specification and Implementation Guide</small>
+# Chess Position Notation
 
 A general purpose <abbr title="American Standard Code for Information Interchange">ASCII</abbr>-based format for defining chess variants' board positions.
 
@@ -7,17 +7,13 @@ A general purpose <abbr title="American Standard Code for Information Interchang
   <dd><time datetime="2013-06-14T23:17:44Z">June 14, 2014</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2015-11-11T23:42:34Z">Nov. 11, 2015</time></dd>
+  <dd><time datetime="2020-05-11T17:29:55Z">May 11, 2020</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
-
-  <dt>Author</dt>
-  <dd><a rel="external author" href="https://github.com/cyril">Cyril Kato</a></dd>
 </dl>
 
 <div class="alert alert-warning">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>This is a work in progress!</strong>
   This is a beta document and may be updated at any time.
 </div>
@@ -32,9 +28,9 @@ This document proposes a format for representing a unique _board position_, prev
 
 This document is a beta of the CPN specification.
 
-<div class="sub-title">Copyright Notice</div>
+<div class="sub-title">Copyright notice</div>
 
-The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
 ***
 

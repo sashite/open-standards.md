@@ -1,23 +1,19 @@
-# Portable Chess Notation <small>Specification and Implementation Guide</small>
+# Portable Chess Notation
 
-A general purpose JSON-based format for recording chess variants' games.
+A general purpose JSON-based format for recording chess variants.
 
 <dl class="dl-horizontal">
   <dt>Created</dt>
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2019-08-05T17:29:55Z">August 5, 2019</time></dd>
+  <dd><time datetime="2020-05-11T17:29:55Z">May 11, 2020</time></dd>
 
-  <dt>Status</dt>
-  <dd>beta</dd>
-
-  <dt>Author</dt>
-  <dd><a rel="external author" href="https://github.com/cyril">Cyril Kato</a></dd>
+  <dt>Version</dt>
+  <dd>0.1.0</dd>
 </dl>
 
 <div class="alert alert-warning">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>This is a work in progress!</strong>
   This is a beta document and may be updated at any time.
 </div>
@@ -32,9 +28,9 @@ This document proposes a format for representing most **chess** games (both the 
 
 This document is a beta of the PCN specification.
 
-<div class="sub-title">Copyright Notice</div>
+<div class="sub-title">Copyright notice</div>
 
-The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
 ***
 
@@ -42,15 +38,15 @@ The content of this page is licensed under the [Creative Commons Attribution 3.0
 
 <abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Board Diff Notation">PBDN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
 
-Able to describe both multidimensional starting positions and related moves, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](//en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](//en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](//en.wikipedia.org/wiki/Shogi), [Western](//en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](//en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
+Able to describe both multidimensional starting positions and related moves, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](https://en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](https://en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](https://en.wikipedia.org/wiki/Shogi), [Western](https://en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](https://en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
 
 ### Notational conventions
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](//tools.ietf.org/html/rfc2119).
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 #### Naming the actors
 
-The key word "actor" and its notation are to be interpreted as described in [General Actor Notation](General-Actor-Notation).
+The key word "actor" and its notation are to be interpreted as described in [General Actor Notation](https://developer.sashite.com/specs/general-actor-notation).
 
 ## Specification goals
 
@@ -89,6 +85,7 @@ The JSON structure below shows the format of the resource:
       "bottomside": {a hash},
       "state": {a string},
       "started_at": {a datetime},
+      "duration": {a number}
       "indexes": {an array},
       "startpos": {an array},
       "moves": {an array}
@@ -103,7 +100,8 @@ The following table defines the properties that appear in this resource:
 | "`topside`"     | a hash     | The topside player. |
 | "`bottomside`"  | a hash     | The bottomside player. |
 | "`state`"       | a string   | Indicates the state of the game. |
-| "`started_at`"  | a datetime | The date and time that the game was started.  The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format. |
+| "`started_at`"  | a datetime | The date and time that the game was started.  The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format. |
+| "`duration`"    | a number   | The difference between the end datetime and the start datetime, expressed in seconds. |
 | "`indexes`"     | an array   | The shape of the board. |
 | "`startpos`"    | an array   | List of squares that identify actors on the board's starting position. |
 | "`moves`"       | an array   | List of moves associated with the game. |
@@ -135,8 +133,6 @@ The possible values are (when the game is finished):
 and (when the game is not finished):
 
 * "`in_progress`"
-* "`draw_request_from_topside`"
-* "`draw_request_from_bottomside`"
 
 ### Starting datetime
 
@@ -144,7 +140,15 @@ The reserved "`started_at`" property is RECOMMENDED.
 
 The "`started_at`" property specifies the starting datetime for the game.
 
-The value is specified in [ISO 8601](//www.w3.org/TR/NOTE-datetime) format.
+The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.
+
+### Game duration
+
+The reserved "`duration`" property is RECOMMENDED.
+
+The "`duration`" property specifies the duration of the game (in seconds).
+
+If present, the value MUST be greater than or equal to `0`.
 
 ### Indexes of board
 
@@ -152,7 +156,9 @@ The reserved "`indexes`" property is REQUIRED.
 
 The "`indexes`" property specifies the shape of the board.
 
-This is a tuple of integers indicating the size of the array in each dimension.  For a board with `n` rows and `m` columns, "`indexes`" will be `[n, m]`.
+This is a tuple of integers indicating the size of the array in each dimension.  For a two-dimensional board, `n` would be the number of rows and `m` the number of columns: `[n, m]`.
+
+For instance, the "`indexes`" value of the Western chessboard is: `[8, 8]`.  But the "`indexes`" value of the Xiangqi chessboard is: `[10, 9]`.
 
 ### Starting position
 
@@ -179,7 +185,7 @@ Even though it is unusual, it is possible to represent a chessboard from one dim
       null, null, null, null, null, null, null, null
     ]
 
-Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>](//en.wikipedia.org/wiki/Banqi).
+Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>](https://en.wikipedia.org/wiki/Banqi).
 
 ###### 7x7 size chessboard
 
@@ -193,7 +199,7 @@ Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>
       null, null, null, null, null, null, null
     ]
 
-Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt></ruby>](//en.wikipedia.org/wiki/Tori_shogi).
+Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt></ruby>](https://en.wikipedia.org/wiki/Tori_shogi).
 
 ###### 5x5x5 size chessboard
 
@@ -229,7 +235,7 @@ Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt
       null, null, null, null, null
     ]
 
-Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach).
+Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach).
 
 ##### Starting position examples
 
@@ -307,7 +313,7 @@ Example of suitable game: [Raumschach](//en.wikipedia.org/wiki/Three-dimensional
 
 The reserved "`moves`" property is REQUIRED.
 
-The moves are an ordered set of _action_ expressed into [portable board diff notation](Portable-Board-Diff-Notation).  A move MUST contain one action.
+The moves are an ordered set of _action_ expressed into [Portable Board Diff Notation](https://developer.sashite.com/specs/portable-board-diff-notation).  A move MUST contain one action.
 
 For example, the following move:
 
@@ -315,10 +321,10 @@ For example, the following move:
 
 can be translated into:
 
-> Move from the coordinate 42 to the coordinate 43 the <q>Shogi promoted Rook</q>.
+> Move from coordinate 42 to coordinate 43 the <q>Shogi promoted Rook</q>.
 
 <div class="alert alert-info">
-  Depending of the context, given by the board and the state of the game, this move MAY be a capture, it MAY be concluded by a promotion, and it MAY be a drop.
+  Depending of the context of the board, this move MAY remove from the board a piece at coordinate 43.
 </div>
 
 <div class="sub-title">Several scenarios</div>
@@ -424,10 +430,11 @@ Move to promote a Shogi <q>Pawn</q>:
 
 ## Example
 
-Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN format:
+Here is the [<q>Immortal Game</q>](https://en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
       "started_at": "1851-06-21T16:00:00Z",
+      "duration": 10800,
 
       "topside": {
         "name": "Lionel, Kieseritsky",
@@ -509,15 +516,15 @@ Here is the [<q>Immortal Game</q>](//en.wikipedia.org/wiki/Immortal_Game) in PCN
 
 <!-- div class="sub-title">See also</div>
 
-* [An implementation in Ruby](//github.com/sashite/pcn.rb) -->
+* [An implementation in Ruby](https://github.com/sashite/pcn.rb) -->
 
 <div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
-* [Portable Board Diff Notation](Portable-Board-Diff-Notation.md)
-* [Portable Game Notation](https://www.chessclub.com/user/help/PGN-spec)
+* [Portable Board Diff Notation](https://developer.sashite.com/specs/portable-board-diff-notation)
+* [Portable Game Notation](https://www.chessclub.com/help/PGN-spec)
 
 <div class="sub-title">Contributing</div>
 
-Want to make this page better?  [Make your changes](//github.com/sashite/specifications.md/edit/master/docs/Portable-Chess-Notation.md) and submit a hug request.
+Want to make this page better?  [Make your changes](https://github.com/sashite/specifications.md/edit/master/docs/Portable-Chess-Notation.md) and submit a hug request.

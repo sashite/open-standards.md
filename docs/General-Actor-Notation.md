@@ -1,4 +1,4 @@
-# General Actor Notation <small>Specification and Implementation Guide</small>
+# General Actor Notation
 
 A general purpose ASCII-based format for storing actors from abstract strategy games.
 
@@ -7,17 +7,13 @@ A general purpose ASCII-based format for storing actors from abstract strategy g
   <dd><time datetime="2012-05-04T01:23:45Z">May 4, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2019-08-05T17:29:55Z">August 5, 2019</time></dd>
+  <dd><time datetime="2020-05-11T17:29:55Z">May 11, 2020</time></dd>
 
   <dt>Status</dt>
   <dd>beta</dd>
-
-  <dt>Author</dt>
-  <dd><a rel="external author" href="https://github.com/cyril">Cyril Kato</a></dd>
 </dl>
 
 <div class="alert alert-warning">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>This is a work in progress!</strong>
   This is a beta document and may be updated at any time.
 </div>
@@ -32,9 +28,9 @@ With chess variants, it is not always relevant to [identify pieces with a single
 
 This document is a beta of the GAN specification.
 
-<div class="sub-title">Copyright Notice</div>
+<div class="sub-title">Copyright notice</div>
 
-The content of this page is licensed under the [Creative Commons Attribution 3.0 License](//creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](//www.apache.org/licenses/LICENSE-2.0).
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
 ***
 
