@@ -81,11 +81,15 @@ When serving PCN over HTTP, the media type "`application/vnd.pcn+json`" is RECOM
 The JSON structure below shows the format of the resource:
 
     {
-      "topside": {a hash},
-      "bottomside": {a hash},
-      "state": {a string},
-      "started_at": {a datetime},
-      "duration": {a number}
+      "is_topside_better": {a boolean},
+      "is_in_check": {a boolean},
+      "event": {a string},
+      "location": {a string},
+      "round": {an integer},
+      "started_on": {a date},
+      "finished_at": {a datetime},
+      "topside": {a hash representing a player},
+      "bottomside": {a hash representing a player},
       "indexes": {an array},
       "startpos": {an array},
       "moves": {an array}
@@ -97,11 +101,15 @@ The following table defines the properties that appear in this resource:
 
 | Property name   | Value      | Description |
 | --------------- | ---------- | ----------- |
-| "`topside`"     | a hash     | The topside player. |
-| "`bottomside`"  | a hash     | The bottomside player. |
-| "`state`"       | a string   | Indicates the state of the game. |
-| "`started_at`"  | a datetime | The date and time that the game was started.  The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format. |
-| "`duration`"    | a number   | The difference between the end datetime and the start datetime, expressed in seconds. |
+| "`is_topside_better`" | a boolean | In the current state of the game, when the game is in progress, indicates whether topside would win, lose or if there would be a draw at the end of regulation time.  Or when the game is over, indicate if topside has won, lost or if there is a draw. |
+| "`is_in_check`" | a boolean | Indicates a player's King (or General in Xiangqi and Janggi) is under threat of capture on their opponent's next turn. |
+| "`event`"       | a string   | Indicates the name of the tournament or match event. |
+| "`location`"    | a string   | Indicates the place or position that the game was in or where it happened. |
+| "`round`"       | a integer  | Indicates the playing round ordinal of the game. |
+| "`started_on`"  | a date     | The date that the game was started. |
+| "`finished_at`" | a datetime | Indicates the date and time when the game should end or ended. |
+| "`topside`"     | a hash representing a player | The topside player. |
+| "`bottomside`"  | a hash representing a player | The bottomside player. |
 | "`indexes`"     | an array   | The shape of the board. |
 | "`startpos`"    | an array   | List of squares that identify actors on the board's starting position. |
 | "`moves`"       | an array   | List of moves associated with the game. |
@@ -114,41 +122,38 @@ The reserved "`topside`" & "`bottomside`" properties are RECOMMENDED.
 
 The following table defines the properties that appear in this resource:
 
-| Property name       | Value               | Description |
-| ------------------- | ------------------- | ----------- |
-| "`name`"            | a string            | The name of the player. |
-| "`rating`"          | an unsigned integer | The rating of the player. |
-| "`remaining_time`"  | an unsigned integer | The remaining time of the player (in seconds). |
+| Property name            | Value               | Description |
+| ------------------------ | ------------------- | ----------- |
+| "`name`"                 | a string            | The name of the player. |
+| "`is_requesting_a_draw`" | a boolean           | The player is offering a draw. |
+| "`elo`"                  | an unsigned integer | The Elo rating of the player. |
 
-### State
+### Round
 
-The reserved "`state`" property is REQUIRED.
+The reserved "`round`" property is RECOMMENDED.
 
-The possible values are (when the game is finished):
+The "`round`" property is the number of the game played between two players.
 
-* "`topside_won`"
-* "`bottomside_won`"
-* "`drawn_game`"
+If present, the value MUST be greater than or equal to `1`.
 
-and (when the game is not finished):
+### Started date
 
-* "`in_progress`"
+The reserved "`started_on`" property is RECOMMENDED.
 
-### Starting datetime
+The "`started_on`" property specifies the starting date for the game.
 
-The reserved "`started_at`" property is RECOMMENDED.
+The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format (eg "`1997-07-16`").
 
-The "`started_at`" property specifies the starting datetime for the game.
+### Finished datetime
 
-The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.
+The reserved "`finished_at`" property is RECOMMENDED.
 
-### Game duration
+The "`finished_at`" property specifies the date and time when the game should end or ended.
 
-The reserved "`duration`" property is RECOMMENDED.
+The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format (eg "`1994-11-05T13:15:30Z`").
 
-The "`duration`" property specifies the duration of the game (in seconds).
-
-If present, the value MUST be greater than or equal to `0`.
+If the property is not present, or if the property is present and its value is `null` or greater than or equal to the current datetime, the game MUST be considered finished.
+Otherwise, the game MUST be considered in progress because the value is less than the current datetime.
 
 ### Indexes of board
 
@@ -158,88 +163,15 @@ The "`indexes`" property specifies the shape of the board.
 
 This is a tuple of integers indicating the size of the array in each dimension.  For a two-dimensional board, `n` would be the number of rows and `m` the number of columns: `[n, m]`.
 
-For instance, the "`indexes`" value of the Western chessboard is: `[8, 8]`.  But the "`indexes`" value of the Xiangqi chessboard is: `[10, 9]`.
+For instance, for the Western chessboard the "`indexes`" value MUST be: `[8, 8]`.  But for the Xiangqi chessboard the "`indexes`" value MUST be: `[10, 9]`.
 
 ### Starting position
 
 The reserved "`startpos`" property is REQUIRED.
 
-#### Board
+Chess positions on the chessboard is represented by an array.
 
-Chess positions on the chessboard can be represented by an array.
-
-Even though it is unusual, it is possible to represent a chessboard from one dimension.
-
-##### Empty position examples
-
-###### 6 size chessboard
-
-    [ null, null, null, null, null, null ]
-
-###### 4x8 size chessboard
-
-    [
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null
-    ]
-
-Example of suitable game: [<ruby lang="zh">盲棋<rt lang="en">Banqi</rt></ruby>](https://en.wikipedia.org/wiki/Banqi).
-
-###### 7x7 size chessboard
-
-    [
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null
-    ]
-
-Example of suitable game: [<ruby lang="ja">禽将棋<rt lang="en">Tori Shogi</rt></ruby>](https://en.wikipedia.org/wiki/Tori_shogi).
-
-###### 5x5x5 size chessboard
-
-    [
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null,
-      null, null, null, null, null
-    ]
-
-Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimensional_chess#Raumschach).
-
-##### Starting position examples
-
-###### Janggi chessboard
+#### Janggi chessboard
 
     [
       "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r",
@@ -254,7 +186,7 @@ Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimen
       "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R"
     ]
 
-###### Makruk chessboard
+#### Makruk chessboard
 
     [
       "m:r", "m:n", "m:b", "m:q", "m:-k", "m:b", "m:n", "m:r",
@@ -267,7 +199,7 @@ Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimen
       "M:R", "M:N", "M:B", "M:-K", "M:Q", "M:B", "M:N", "M:R"
     ]
 
-###### Shogi chessboard
+#### Shogi chessboard
 
     [
       "s:l", "s:n", "s:s", "s:g", "s:-k", "s:g", "s:s", "s:n", "s:l",
@@ -281,7 +213,7 @@ Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimen
       "S:L", "S:N", "S:S", "S:G", "S:-K", "S:G", "S:S", "S:N", "S:L"
     ]
 
-###### Western chessboard
+#### Western chessboard
 
     [
       "w:r", "w:n", "w:b", "w:q", "w:-k", "w:b", "w:n", "w:r",
@@ -294,7 +226,7 @@ Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimen
       "W:R", "W:N", "W:B", "W:Q", "W:-K", "W:B", "W:N", "W:R"
     ]
 
-###### Xiangqi chessboard
+#### Xiangqi chessboard
 
     [
       "x:r", "x:h", "x:e", "x:a", "x:-g", "x:a", "x:e", "x:h", "x:r",
@@ -309,7 +241,7 @@ Example of suitable game: [Raumschach](https://en.wikipedia.org/wiki/Three-dimen
       "X:R", "X:H", "X:E", "X:A", "X:-G", "X:A", "X:E", "X:H", "X:R"
     ]
 
-### Moves <small>on the chessboard</small>
+### Moves on the chessboard
 
 The reserved "`moves`" property is REQUIRED.
 
@@ -321,7 +253,7 @@ For example, the following move:
 
 can be translated into:
 
-> Move from coordinate 42 to coordinate 43 the <q>Shogi promoted Rook</q>.
+> Move a piece from coordinate 42 to coordinate 43 which becomes a <q>Shogi promoted Rook</q>.
 
 <div class="alert alert-info">
   Depending of the context of the board, this move MAY remove from the board a piece at coordinate 43.
@@ -329,9 +261,9 @@ can be translated into:
 
 <div class="sub-title">Several scenarios</div>
 
-#### Drop <small>a Shogi Rook to square 2</small>
+#### Drop
 
-Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retained <q>in hand</q>, and can be brought back into play under the capturing player's control.  On any turn, instead of moving an actor on the board, a player MAY take an actor that had been previously captured and place it, unpromoted side up, on any empty square, facing the opposing side.  The actor is then part of the forces controlled by that player.  This is termed _dropping_ the actor, or just a _drop_.
+Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retained <q>in hand</q>, and can be brought back into play under the capturing player's control.  On any turn, instead of moving an actor on the board, a player MAY take an actor that had been previously captured and place it.  The actor is then part of the forces controlled by that player.  This is termed _dropping_ the actor, or just a _drop_.
 
 Given the following position:
 
@@ -344,7 +276,7 @@ Given the following position:
 
 When this move is played:
 
-    [ 2, 2, "S:R" ]
+    [ null, 2, "S:R" ]
 
 Then the position becomes:
 
@@ -355,11 +287,7 @@ Then the position becomes:
       null, null, null, null, null, null
     ]
 
-<div class="alert alert-info">
-  By default, the source square of the dropped actors SHOULD be equal to the destination square.
-</div>
-
-#### Capture <small>an actor</small>
+#### Capture
 
 Let's detach an opponent's actor from the board by taking it with a friendly actor:
 
@@ -375,7 +303,7 @@ Given the following position:
 
 When this move is played:
 
-    [ 0, 1, "s:r" ]
+    [ 0, 1, "s:r", "s:p" ]
 
 Then the position becomes:
 
@@ -387,10 +315,9 @@ Then the position becomes:
       null, null, null, null, null, null
     ]
 
-<span class="label label-info">Captured actors:</span>
-The name of captured actors MUST change; e.g., at Shogi, the new side of captured actors can be deduced from the case.
+Note: The 4th parameter indicates that the captured "`S:P`" piece becomes "`s:p`" and is retained in hand by the player who played.
 
-#### Shift <small>an actor on the board</small>
+#### Shift
 
 Let's transfer a friendly actor (<q>Xiangqi Chariot, Black</q>) from its square to an _empty square_ of the board.
 
@@ -418,35 +345,75 @@ Then the position becomes:
       null, null, null, null, null, null
     ]
 
-#### Promote <small>an actor</small>
+#### Promotion
 
-Move to promote a Western <q>Pawn</q> to a <q>Queen</q>:
+##### Western <q>Pawn</q> to a <q>Queen</q>
 
-    [ 15, 20, "w:q" ]
+Given the following position:
 
-Move to promote a Shogi <q>Pawn</q>:
+    [
+      null, null, null, null, null, null,
+      "W:P", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
+    ]
 
-    [ 1, 2, "s:+p" ]
+When this move is played:
+
+    [ 6, 0, "W:Q" ]
+
+Then the position becomes:
+
+    [
+      "W:Q", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
+    ]
+
+##### Shogi <q>Pawn</q> to a promoted Shogi <q>Pawn</q>
+
+Given the following position:
+
+    [
+      null, null, null, null, null, null,
+      "S:P", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
+    ]
+
+When this move is played:
+
+    [ 6, 0, "S:+P" ]
+
+Then the position becomes:
+
+    [
+      "S:+P", null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null, null
+    ]
 
 ## Example
 
 Here is the [<q>Immortal Game</q>](https://en.wikipedia.org/wiki/Immortal_Game) in PCN format:
 
     {
-      "started_at": "1851-06-21T16:00:00Z",
-      "duration": 10800,
+      "event": "London",
+      "location": "London ENG",
 
-      "topside": {
-        "name": "Lionel, Kieseritsky",
-        "rating": 2700,
-        "remaining_time": null
-      },
+      "started_on": "1851-06-21",
 
-      "bottomside": {
-        "name": "Anderssen, Adolph",
-        "rating": 2600,
-        "remaining_time": null
-      },
+      "is_in_check": true,
+      "is_topside_better": false,
+
+      "topside": { "name": "Lionel Adalbert Bagration Felix Kieseritzky" },
+      "bottomside": { "name": "Adolf Anderssen" },
 
       "state": "bottomside_won",
 
