@@ -7,16 +7,16 @@ A general purpose JSON-based format for recording chess variants.
   <dd><time datetime="2012-08-05T01:23:45Z">August 5, 2012</time></dd>
 
   <dt>Updated</dt>
-  <dd><time datetime="2020-05-11T17:29:55Z">May 11, 2020</time></dd>
+  <dd><time datetime="2020-06-14T17:29:55Z">June 14, 2020</time></dd>
 
   <dt>Version</dt>
-  <dd>0.1.0</dd>
+  <dd>1.0.0</dd>
 </dl>
 
-<div class="alert alert-warning">
+<aside class="alert alert-warning">
   <strong>This is a work in progress!</strong>
   This is a beta document and may be updated at any time.
-</div>
+</aside>
 
 ***
 
@@ -36,37 +36,13 @@ Except as otherwise noted, the content of this page is licensed under the [Creat
 
 ## Introduction
 
-<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Board Diff Notation">PBDN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
+<abbr title="Portable Chess Notation">PCN</abbr> (<q>Portable Chess Notation</q>) is a lightweight format based on <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="Portable Move Notation">PMN</abbr> that gives a consistent and easy way to represent most chess games between two-players.
 
-Able to describe both multidimensional starting positions and related moves, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](https://en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](https://en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](https://en.wikipedia.org/wiki/Shogi), [Western](https://en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](https://en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
+Able to describe both multidimensional games and related moves, in progress and finished games, easy for humans to read and write, and easy for machines to import and export, it is completely laws of chess independent and compatible with the main variants, including [<ruby lang="ko">장기<rt lang="en">Janggi</rt></ruby>](https://en.wikipedia.org/wiki/Janggi), [<ruby lang="th">หมากรุก<rt lang="en">Makruk</rt></ruby>](https://en.wikipedia.org/wiki/Makruk), [<ruby lang="ja">将棋<rt lang="en">Shogi</rt></ruby>](https://en.wikipedia.org/wiki/Shogi), [Chess](https://en.wikipedia.org/wiki/Chess), [<ruby lang="zh">象棋<rt lang="en">Xiangqi</rt></ruby>](https://en.wikipedia.org/wiki/Xiangqi).  These properties make PCN an ideal data-interchange format for recording chess games.
 
 ### Notational conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
-
-#### Naming the actors
-
-The key word "actor" and its notation are to be interpreted as described in [General Actor Notation](https://developer.sashite.com/specs/general-actor-notation).
-
-## Specification goals
-
-A specification for a portable chess notation MUST observe the following criteria:
-
-1. The details of the system MUST be publicly available and free of unnecessary complexity.
-2. The details of the system MUST be non-proprietary so that users and software developers are unrestricted by concerns about infringing on intellectual property rights.
-3. The system MUST work for a variety of programs.  The format SHOULD be such that it can be used by chess database programs, chess publishing programs, chess server programs, and chessplaying programs without being unnecessarily specific to any particular application class.
-4. The system MUST handle games which are playable by two sides.
-5. The system MUST be easily expandable and scalable.  Examples: new chessboards, new opening positions, new actors, new moves, new rules, etc.
-  * The system MUST be cross-variants.
-    It SHOULD be able to represent games where sides MAY play
-    different chess variants such as Janggi, Makruk, Shogi, Western, Xiangqi.
-  * The system MUST handle chessboards of any dimension.
-    Thus, it SHOULD be able to represent board dimensions such as: 2D, 3D, etc.
-  * The system MUST handle chessboards of any size.
-    Thus, it SHOULD be able to represent board sizes such as: 8x8, 9x9, 9x9x9, etc.
-  * The system MUST be able to fully describe moves according to
-    a concerned Laws of Chess and the given chessboard structure.
-6. Finally, the system SHOULD handle the same kinds and amounts of data that are already handled by existing chess software and by print media.
 
 ## How to serve PCN
 
@@ -81,70 +57,61 @@ When serving PCN over HTTP, the media type "`application/vnd.pcn+json`" is RECOM
 The JSON structure below shows the format of the resource:
 
     {
-      "is_topside_better": {a boolean},
-      "is_in_check": {a boolean},
-      "event": {a string},
-      "location": {a string},
-      "round": {an integer},
-      "started_on": {a date},
-      "finished_at": {a datetime},
-      "topside": {a hash representing a player},
       "bottomside": {a hash representing a player},
+      "event": {a string},
+      "finished_at": {a datetime},
+      "href": {a string},
       "indexes": {an array},
+      "is_in_check": {a boolean},
+      "is_topside_better": {a boolean},
+      "is_turn_to_topside": {a boolean},
+      "location": {a string},
+      "moves": {an array},
+      "name": {a string},
+      "round": {an unsigned integer},
+      "started_on": {a date},
       "startpos": {an array},
-      "moves": {an array}
+      "topside": {a hash representing a player}
     }
 
 <div class="sub-title">Properties</div>
 
 The following table defines the properties that appear in this resource:
 
-| Property name   | Value      | Description |
-| --------------- | ---------- | ----------- |
-| "`is_topside_better`" | a boolean | In the current state of the game, when the game is in progress, indicates whether topside would win, lose or if there would be a draw at the end of regulation time.  Or when the game is over, indicate if topside has won, lost or if there is a draw. |
-| "`is_in_check`" | a boolean | Indicates a player's King (or General in Xiangqi and Janggi) is under threat of capture on their opponent's next turn. |
-| "`event`"       | a string   | Indicates the name of the tournament or match event. |
-| "`location`"    | a string   | Indicates the place or position that the game was in or where it happened. |
-| "`round`"       | a integer  | Indicates the playing round ordinal of the game. |
-| "`started_on`"  | a date     | The date that the game was started. |
-| "`finished_at`" | a datetime | Indicates the date and time when the game should end or ended. |
-| "`topside`"     | a hash representing a player | The topside player. |
-| "`bottomside`"  | a hash representing a player | The bottomside player. |
-| "`indexes`"     | an array   | The shape of the board. |
-| "`startpos`"    | an array   | List of squares that identify actors on the board's starting position. |
-| "`moves`"       | an array   | List of moves associated with the game. |
+| Property name                                       | Value                                         | Required  | Default | Description |
+| --------------------------------------------------- | --------------------------------------------- | --------- | ------- | ----------- |
+| [`bottomside`](#property-bottomside)                | a hash representing a [player](#value-player) | false     | `{}`    | The bottom-side player. |
+| [`event`](#property-event)                          | a string                                      | false     | `null`  | Indicates the name of the tournament or match event. |
+| [`finished_at`](#property-finished_at)              | a datetime                                    | false     | `null`  | Indicates the date and time when the game should end or ended. |
+| [`href`](#property-href)                            | a string                                      | false     | `null`  | Indicates a website that display the game. |
+| [`indexes`](#property-indexes)                      | an array                                      | true      |         | The shape of the board. |
+| [`is_in_check`](#property-is_in_check)              | a boolean                                     | false     |         | Indicates the King (or the General in Xiangqi) is under threat of capture on their opponent's next turn. |
+| [`is_topside_better`](#property-is_topside_better)  | a boolean                                     | false     | `null`  | When the game is in progress, indicates whether top-side would win, lose or if there would be a draw at the end of regulation time.  Or when the game is over, indicate if top-side has won, lost or if there is a draw. |
+| [`is_turn_to_topside`](#property-is_turn_to_topside) | a boolean                                    | false     |         | Indicates the player who must play. |
+| [`location`](#property-location)                    | a string                                      | false     | `null`  | Indicates the place or position that the game was in or where it happened. |
+| [`moves`](#property-moves)                          | an array                                      | false     | `[]`    | Indicates the moves previously played. |
+| [`name`](#property-name)                            | a string                                      | false     | `null`  | Indicates the name of the game. |
+| [`round`](#property-round)                          | an unsigned integer                           | false     | `null`  | Indicates the playing round ordinal of the game. |
+| [`started_on`](#property-started_on)                | a date                                        | false     | `null`  | The date that the game was started. |
+| [`startpos`](#property-startpos)                    | an array                                      | false     | `null` | List of squares that identify pieces on the starting position. |
+| [`topside`](#property-topside)                      | a hash representing a [player](#value-player) | false     | `{}`    | The top-side player. |
 
-### Top-side & Bottom-side
 
-The reserved "`topside`" & "`bottomside`" properties are RECOMMENDED.
+<h3 id="property-bottomside">Bottom-side player</h3>
 
-<div class="sub-title">Properties</div>
+The reserved "`bottomside`" property is RECOMMENDED.
 
-The following table defines the properties that appear in this resource:
+The "`bottomside`" property represents a [player](#value-player).
 
-| Property name            | Value               | Description |
-| ------------------------ | ------------------- | ----------- |
-| "`name`"                 | a string            | The name of the player. |
-| "`is_requesting_a_draw`" | a boolean           | The player is offering a draw. |
-| "`elo`"                  | an unsigned integer | The Elo rating of the player. |
 
-### Round
+<h3 id="property-event">Event</h3>
 
-The reserved "`round`" property is RECOMMENDED.
+The reserved "`event`" property is RECOMMENDED.
 
-The "`round`" property is the number of the game played between two players.
+The "`event`" property is the name of the tournament or match event.
 
-If present, the value MUST be greater than or equal to `1`.
 
-### Started date
-
-The reserved "`started_on`" property is RECOMMENDED.
-
-The "`started_on`" property specifies the starting date for the game.
-
-The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format (eg "`1997-07-16`").
-
-### Finished datetime
+<h3 id="property-finished_at">Finished datetime</h3>
 
 The reserved "`finished_at`" property is RECOMMENDED.
 
@@ -155,7 +122,15 @@ The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format
 If the property is not present, or if the property is present and its value is `null` or greater than or equal to the current datetime, the game MUST be considered finished.
 Otherwise, the game MUST be considered in progress because the value is less than the current datetime.
 
-### Indexes of board
+
+<h3 id="property-href">Hyperlink</h3>
+
+The reserved "`href`" property is RECOMMENDED.
+
+The "`href`" property specifies a link that targets a document about the game.
+
+
+<h3 id="property-indexes">Indexes of board</h3>
 
 The reserved "`indexes`" property is REQUIRED.
 
@@ -165,257 +140,246 @@ This is a tuple of integers indicating the size of the array in each dimension. 
 
 For instance, for the Western chessboard the "`indexes`" value MUST be: `[8, 8]`.  But for the Xiangqi chessboard the "`indexes`" value MUST be: `[10, 9]`.
 
-### Starting position
 
-The reserved "`startpos`" property is REQUIRED.
+<h3 id="property-is_in_check">In check?</h3>
 
-Chess positions on the chessboard is represented by an array.
+The reserved "`is_in_check`" property is RECOMMENDED.
 
-#### Janggi chessboard
+The "`is_in_check`" property specifies a player's king (or general in xiangqi and janggi) is under threat of capture on their opponent's next turn.
 
-    [
-      "j:r", "j:m", "j:e", "j:s", null, "j:s", "j:e", "j:m", "j:r",
-      null, null, null, null, "j:-g", null, null, null, null,
-      null, "j:p", null, null, null, null, null, "j:p", null,
-      "j:j", null, "j:j", null, "j:j", null, "j:j", null, "j:j",
-      null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null,
-      "J:J", null, "J:J", null, "J:J", null, "J:J", null, "J:J",
-      null, "J:P", null, null, null, null, null, "J:P", null,
-      null, null, null, null, "J:-G", null, null, null, null,
-      "J:R", "J:M", "J:E", "J:S", null, "J:S", "J:E", "J:M", "J:R"
-    ]
 
-#### Makruk chessboard
+<h3 id="property-is_topside_better">Top-side better?</h3>
 
-    [
-      "m:r", "m:n", "m:b", "m:q", "m:-k", "m:b", "m:n", "m:r",
-      null, null, null, null, null, null, null, null,
-      "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p", "m:p",
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P", "M:P",
-      null, null, null, null, null, null, null, null,
-      "M:R", "M:N", "M:B", "M:-K", "M:Q", "M:B", "M:N", "M:R"
-    ]
+The reserved "`is_topside_better`" property is RECOMMENDED.
 
-#### Shogi chessboard
+When the game is in progress, indicates whether top-side would win, lose or if there would be a draw at the end of regulation time.
+Or when the game is over, indicates if top-side has won, lost or if there is a draw.
 
-    [
-      "s:l", "s:n", "s:s", "s:g", "s:-k", "s:g", "s:s", "s:n", "s:l",
-      null, "s:r", null, null, null, null, null, "s:b", null,
-      "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p", "s:p",
-      null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null,
-      "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P", "S:P",
-      null, "S:B", null, null, null, null, null, "S:R", null,
-      "S:L", "S:N", "S:S", "S:G", "S:-K", "S:G", "S:S", "S:N", "S:L"
-    ]
 
-#### Western chessboard
+<h3 id="property-is_turn_to_topside">Turn to top-side?</h3>
 
-    [
-      "w:r", "w:n", "w:b", "w:q", "w:-k", "w:b", "w:n", "w:r",
-      "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p", "w:p",
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null,
-      "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P", "W:P",
-      "W:R", "W:N", "W:B", "W:Q", "W:-K", "W:B", "W:N", "W:R"
-    ]
+The reserved "`is_turn_to_topside`" property is RECOMMENDED.
 
-#### Xiangqi chessboard
+Indicates the player who must play (the current player).
 
-    [
-      "x:r", "x:h", "x:e", "x:a", "x:-g", "x:a", "x:e", "x:h", "x:r",
-      null, null, null, null, null, null, null, null, null,
-      null, "x:c", null, null, null, null, null, "x:c", null,
-      "x:s", null, "x:s", null, "x:s", null, "x:s", null, "x:s",
-      null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null,
-      "X:S", null, "X:S", null, "X:S", null, "X:S", null, "X:S",
-      null, "X:C", null, null, null, null, null, "X:C", null,
-      null, null, null, null, null, null, null, null, null,
-      "X:R", "X:H", "X:E", "X:A", "X:-G", "X:A", "X:E", "X:H", "X:R"
-    ]
 
-### Moves on the chessboard
+<h3 id="property-location">Location</h3>
 
-The reserved "`moves`" property is REQUIRED.
+The reserved "`location`" property is RECOMMENDED.
 
-The moves are an ordered set of _action_ expressed into [Portable Board Diff Notation](https://developer.sashite.com/specs/portable-board-diff-notation).  A move MUST contain one action.
+Indicates the place or position that the game was in or where it happened.
+
+
+<h3 id="property-moves">Moves on the chessboard</h3>
+
+The reserved "`moves`" property is OPTIONAL.
+
+The moves are an ordered set of _action_ based on [Portable Move Notation](https://developer.sashite.com/specs/portable-move-notation) format.  A move MUST contain at least one action.
 
 For example, the following move:
 
-    [ 42, 43, "S:+R" ]
+    [ 42, 43, "+R", null ]
 
 can be translated into:
 
 > Move a piece from coordinate 42 to coordinate 43 which becomes a <q>Shogi promoted Rook</q>.
 
-<div class="alert alert-info">
+<p class="alert alert-info">
   Depending of the context of the board, this move MAY remove from the board a piece at coordinate 43.
-</div>
+</p>
 
-<div class="sub-title">Several scenarios</div>
+If the property is not present, or if the property is present and its value is `null`, the list of moves MUST be considered as empty.
 
-#### Drop
 
-Captured actors can be truly _captured_, such as in Shogi.  Thus, they are retained <q>in hand</q>, and can be brought back into play under the capturing player's control.  On any turn, instead of moving an actor on the board, a player MAY take an actor that had been previously captured and place it.  The actor is then part of the forces controlled by that player.  This is termed _dropping_ the actor, or just a _drop_.
+<h3 id="property-name">Name</h3>
 
-Given the following position:
+The reserved "`name`" property is RECOMMENDED.
 
-    [
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
-    ]
+Indicates the name of the game.
 
-When this move is played:
 
-    [ null, 2, "S:R" ]
+<h3 id="property-round">Round</h3>
 
-Then the position becomes:
+The reserved "`round`" property is RECOMMENDED.
 
-    [
-      null, null, "S:R", null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
-    ]
+The "`round`" property is the number of the game played between two players.
 
-#### Capture
+If present, the value MUST be greater than or equal to `1`.
 
-Let's detach an opponent's actor from the board by taking it with a friendly actor:
 
-Given the following position:
+<h3 id="property-started_on">Started date</h3>
 
-    [
-      "s:r", "S:P", null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
-    ]
+The reserved "`started_on`" property is RECOMMENDED.
 
-When this move is played:
+The "`started_on`" property specifies the starting date for the game.
 
-    [ 0, 1, "s:r", "s:p" ]
+The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format (eg "`1997-07-16`").
 
-Then the position becomes:
+
+<h3 id="property-startpos">Starting position</h3>
+
+The reserved "`startpos`" property is RECOMMENDED.
+
+The "`startpos`" property specifies a one-dimensional list of squares representing the starting position.
+
+If the property is not present, or if the property is present and its value is `null`, each square of the board MUST be considered as empty.
+
+Janggi starting position example:
 
     [
-      null, "s:r", null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
+      "r", "m", "e", "s", null, "s", "e", "m", "r",
+      null, null, null, null, "g", null, null, null, null,
+      null, "p", null, null, null, null, null, "p", null,
+      "j", null, "j", null, "j", null, "j", null, "j",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "J", null, "J", null, "J", null, "J", null, "J",
+      null, "P", null, null, null, null, null, "P", null,
+      null, null, null, null, "G", null, null, null, null,
+      "R", "M", "E", "S", null, "S", "E", "M", "R"
     ]
 
-Note: The 4th parameter indicates that the captured "`S:P`" piece becomes "`s:p`" and is retained in hand by the player who played.
-
-#### Shift
-
-Let's transfer a friendly actor (<q>Xiangqi Chariot, Black</q>) from its square to an _empty square_ of the board.
-
-Given the following position:
+Makruk starting position example:
 
     [
-      "x:r", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
+      "r", "n", "b", "q", "k", "b", "n", "r",
+      null, null, null, null, null, null, null, null,
+      "p", "p", "p", "p", "p", "p", "p", "p",
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      "P", "P", "P", "P", "P", "P", "P", "P",
+      null, null, null, null, null, null, null, null,
+      "R", "N", "B", "K", "Q", "B", "N", "R"
     ]
 
-When this move is played:
-
-    [ 0, 6, "x:r" ]
-
-Then the position becomes:
+Shogi starting position example:
 
     [
-      null, null, null, null, null, null,
-      "x:r", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
+      "l", "n", "s", "g", "k", "g", "s", "n", "l",
+      null, "r", null, null, null, null, null, "b", null,
+      "p", "p", "p", "p", "p", "p", "p", "p", "p",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "P", "P", "P", "P", "P", "P", "P", "P", "P",
+      null, "B", null, null, null, null, null, "R", null,
+      "L", "N", "S", "G", "K", "G", "S", "N", "L"
     ]
 
-#### Promotion
-
-##### Western <q>Pawn</q> to a <q>Queen</q>
-
-Given the following position:
+Western starting position example:
 
     [
-      null, null, null, null, null, null,
-      "W:P", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
+      "♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜",
+      "♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟",
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null,
+      "♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙",
+      "♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"
     ]
 
-When this move is played:
-
-    [ 6, 0, "W:Q" ]
-
-Then the position becomes:
+Xiangqi starting position example:
 
     [
-      "W:Q", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
+      "車", "馬", "象", "士", "將", "士", "象", "馬", "車",
+      null, null, null, null, null, null, null, null, null,
+      null, "砲", null, null, null, null, null, "砲", null,
+      "卒", null, "卒", null, "卒", null, "卒", null, "卒",
+      null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null,
+      "兵", null, "兵", null, "兵", null, "兵", null, "兵",
+      null, "炮", null, null, null, null, null, "炮", null,
+      null, null, null, null, null, null, null, null, null,
+      "俥", "傌", "相", "仕", "帥", "仕", "相", "傌", "俥"
     ]
 
-##### Shogi <q>Pawn</q> to a promoted Shogi <q>Pawn</q>
 
-Given the following position:
+<h3 id="property-topside">Top-side player</h3>
 
-    [
-      null, null, null, null, null, null,
-      "S:P", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
-    ]
+The reserved "`topside`" property is RECOMMENDED.
 
-When this move is played:
+The "`topside`" property represents a [player](#value-player).
 
-    [ 6, 0, "S:+P" ]
 
-Then the position becomes:
+<h3 id="value-player">Player</h3>
 
-    [
-      "S:+P", null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null,
-      null, null, null, null, null, null
-    ]
+<div class="sub-title">Resource representation</div>
 
-## Example
-
-Here is the [<q>Immortal Game</q>](https://en.wikipedia.org/wiki/Immortal_Game) in PCN format:
+The JSON structure below shows the format of the resource:
 
     {
+      "elo": {an unsigned integer},
+      "in_hand_pieces": {an array},
+      "is_requesting_a_draw": {a boolean},
+      "name": {a string}
+    }
+
+<div class="sub-title">Properties</div>
+
+The following table defines the properties that appear in this resource:
+
+| Property name                                                   | Value               | Required  | Default | Description |
+| --------------------------------------------------------------- | ------------------- | --------- | ------- | ----------- |
+| [`elo`](#player-property-elo)                                   | an unsigned integer | false     | `null`  | The Elo rating of the player. |
+| [`in_hand_pieces`](#player-property-in_hand_pieces)             | an array            | false     | `[]`    | The list of pieces in hand. |
+| [`is_requesting_a_draw`](#player-property-is_requesting_a_draw) | a boolean           | false     | `false` | The player is offering a draw. |
+| [`name`](#player-property-name)                                 | a string            | false     | `null`  | The name of the player. |
+
+<h4 id="player-property-elo">Player Elo</h4>
+
+The reserved "`elo`" property is RECOMMENDED.
+
+The "`elo`" property represents the relative skill level of a player at the beginning of the game, according to the Elo rating system.
+
+If present, the value MUST be greater than or equal to `0`.
+
+<h4 id="player-property-in_hand_pieces">Pieces in hand</h4>
+
+The reserved "`in_hand_pieces`" property is RECOMMENDED.
+
+The "`in_hand_pieces`" property represents the relative skill level of a player at the beginning of the game, according to the Elo rating system.
+
+If the property is not present, or if the property is present and its value is `null`, the list of pieces in hand MUST be considered as empty.
+
+<h4 id="player-property-is_requesting_a_draw">Draw request</h4>
+
+The reserved "`is_requesting_a_draw`" property is RECOMMENDED.
+
+The "`is_requesting_a_draw`" property represents a proposal for a draw from the player to the opponent player.
+If the opponent accepts, the game is a draw (by mutual agreement).
+
+If the property is not present, or if the property is present and its value is `null`, there is no proposal for a draw.
+
+<h4 id="player-property-name">Player's name</h4>
+
+The reserved "`name`" property is RECOMMENDED.
+
+The "`name`" property represents the name of the player.
+
+## Chess game example
+
+The [<q>Immortal Game</q>](https://en.wikipedia.org/wiki/Immortal_Game) in PCN format:
+
+    {
+      "name": "Immortal Game",
+
       "event": "London",
       "location": "London ENG",
+      "href": "https://en.wikipedia.org/wiki/Immortal_Game",
 
       "started_on": "1851-06-21",
 
       "is_in_check": true,
       "is_topside_better": false,
 
-      "topside": { "name": "Lionel Adalbert Bagration Felix Kieseritzky" },
-      "bottomside": { "name": "Adolf Anderssen" },
+      "topside": {
+        "name": "Lionel Adalbert Bagration Felix Kieseritzky"
+      },
 
-      "state": "bottomside_won",
+      "bottomside": {
+        "name": "Adolf Anderssen"
+      },
 
       "indexes": [8, 8],
 
@@ -479,17 +443,93 @@ Here is the [<q>Immortal Game</q>](https://en.wikipedia.org/wiki/Immortal_Game) 
       ]
     }
 
+## Shogi game example
+
+[The shortest possible game](https://userpages.monmouth.com/~colonel/shortshogi.html) in PCN format:
+
+    {
+      "name": "The Shortest Possible Game of Shogi",
+
+      "is_in_check": true,
+      "is_topside_better": false,
+
+      "href": "https://userpages.monmouth.com/~colonel/shortshogi.html",
+
+      "indexes": [9, 9],
+
+      "startpos": [
+        "l", "n", "s", "g", "k", "g", "s", "n", "l",
+        null, "r", null, null, null, null, null, "b", null,
+        "p", "p", "p", "p", "p", "p", "p", "p", "p",
+        null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null,
+        "P", "P", "P", "P", "P", "P", "P", "P", "P",
+        null, "B", null, null, null, null, null, "R", null,
+        "L", "N", "S", "G", "K", "G", "S", "N", "L"
+      ],
+
+      "moves": [
+        [ 56, 47, "P" ],
+        [ 3, 11, "g" ],
+        [ 64, 24, "+B", "P" ],
+        [ 5, 14, "g" ],
+        [ 24, 14, "+B", "G" ],
+        [ 4, 3, "k" ],
+        [ null, 13, "G" ]
+      ]
+    }
+
+## Xiangqi game example
+
+A very short game in PCN format:
+
+    {
+      "name": "Short Double Cannons Checkmate",
+
+      "is_in_check": true,
+      "is_topside_better": false,
+
+      "indexes": [10, 9],
+
+      "startpos": [
+        "車", "馬", "象", "士", "將", "士", "象", "馬", "車",
+        null, null, null, null, null, null, null, null, null,
+        null, "砲", null, null, null, null, null, "砲", null,
+        "卒", null, "卒", null, "卒", null, "卒", null, "卒",
+        null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null,
+        "兵", null, "兵", null, "兵", null, "兵", null, "兵",
+        null, "炮", null, null, null, null, null, "炮", null,
+        null, null, null, null, null, null, null, null, null,
+        "俥", "傌", "相", "仕", "帥", "仕", "相", "傌", "俥"
+      ],
+
+      "moves": [
+        [ 64, 67, "炮" ],
+        [ 25, 22, "砲" ],
+        [ 70, 52, "炮" ],
+        [ 19, 55, "砲" ],
+        [ 67, 31, "炮" ],
+        [ 22, 58, "砲" ],
+        [ 52, 49, "炮" ]
+      ]
+    }
+
 ***
 
-<!-- div class="sub-title">See also</div>
+<div class="sub-title">See also</div>
 
-* [An implementation in Ruby](https://github.com/sashite/pcn.rb) -->
+* [Portable Move Notation](https://developer.sashite.com/specs/portable-move-notation)
+
+<div class="sub-title">Implementation</div>
+
+* [A PCN viewer in JavaScript](https://github.com/sashite/pcn-viewer.js)
 
 <div class="sub-title">Informative References</div>
 
 This work is influenced by several documents.
 
-* [Portable Board Diff Notation](https://developer.sashite.com/specs/portable-board-diff-notation)
 * [Portable Game Notation](https://www.chessclub.com/help/PGN-spec)
 
 <div class="sub-title">Contributing</div>
